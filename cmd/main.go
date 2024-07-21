@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	component := user.Hello("Testie")
+	component := user.Hello("matt noos")
 
 	http.Handle("/", templ.Handler(component))
 
