@@ -5,11 +5,11 @@ import (
 	"net/http"
 
 	"github.com/a-h/templ"
-	user "github.com/timeitel/groceries/internal/components"
+	components "github.com/timeitel/groceries/internal/components/layout"
 )
 
 func main() {
-	component := user.Hello("matt noos")
+	component := components.Layout("hi")
 
 	http.Handle("/", templ.Handler(component))
 
