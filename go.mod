@@ -1,5 +1,5 @@
-module groceries
+module github.com/timeitel/groceries
 
 go 1.22.4
 
-require github.com/a-h/templ v0.2.747 // indirect
+require github.com/a-h/templ v0.2.747
