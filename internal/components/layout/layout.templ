@@ -1,4 +1,6 @@
-package components
+package layout
+
+import "github.com/timeitel/groceries/internal/components/user"
 
 templ Layout(title string) {
 	<html>
@@ -9,9 +11,9 @@ templ Layout(title string) {
 			<link rel="stylesheet" href="/static/css/output.css"/>
 			<title>{ title }</title>
 		</head>
-		@hello("matt noos")
-		<body>
-			<main class="p-6 grid gap-4">
+		<body class="h-full bg-green-200">
+			<main>
+				@user.Hello("matt noos")
 				{ children... }
 			</main>
 		</body>

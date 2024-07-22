@@ -1,2 +1,2 @@
-<div class=\"bg-green-50\">Hello, 
+<div class=\"bg-green-50\">Hey 
 </div>
