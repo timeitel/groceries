@@ -1,6 +1,7 @@
 - htmx
 - go
 - sqlite
+- docker
 
 ### Dev
 
