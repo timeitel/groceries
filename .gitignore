@@ -19,3 +19,6 @@ go.work
 
 # air build errors
 cmd/tmp
+
+# build output
+static/css/output.css
