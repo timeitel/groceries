@@ -20,5 +20,7 @@ go.work
 # air build errors
 cmd/tmp
 
-# build output
+# build artifacts
 static/css/output.css
+*_templ.go
+*_templ.txt
