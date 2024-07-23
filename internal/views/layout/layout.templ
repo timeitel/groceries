@@ -1,6 +1,9 @@
-package layout
+package views
 
-import "github.com/timeitel/groceries/internal/components/user"
+import "github.com/timeitel/groceries/internal/views/user"
+import "github.com/timeitel/groceries/internal/components/card"
+
+var items = map[string]string{"strawberry": "🍓", "banana": "🍌", "apple": "🍎"}
 
 templ Layout() {
 	<html>
@@ -14,7 +17,11 @@ templ Layout() {
 		<body class="h-full bg-green-200">
 			<main>
 				@user.Hello("matt noos")
-				{ children... }
+				<div class="flex flex-wrap gap-4 p-6">
+					for item, icon := range items {
+						@components.Card(item, icon)
+					}
+				</div>
 			</main>
 		</body>
 	</html>
