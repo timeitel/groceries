@@ -562,6 +562,10 @@ video {
   height: 100%;
 }
 
+.w-1 {
+  width: 0.25rem;
+}
+
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -582,6 +586,11 @@ video {
 .bg-green-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(240 253 244 / var(--tw-bg-opacity));
+}
+
+.bg-gray-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
 
 .p-6 {
