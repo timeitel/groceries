@@ -1,23 +1,23 @@
 package main
 
 import (
-	"fmt"
-	"log"
 	"net/http"
+
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 
 	"github.com/timeitel/groceries/internal/routes"
 )
 
 func main() {
-	fs := http.FileServer(http.Dir("../static/"))
-	http.Handle("/static/", http.StripPrefix("/static/", fs))
+	e := echo.New()
+
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+
+	e.Static("/static", "../static/")
 
 	http.HandleFunc("/item", routes.PostItemHandler)
 
-	fmt.Println("Running on port 3000")
-
-	err := http.ListenAndServe(":3000", nil)
-	if err != nil {
-		log.Fatal(err)
-	}
+	e.Logger.Fatal(e.Start(":3000"))
 }
