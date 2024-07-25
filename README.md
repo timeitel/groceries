@@ -8,6 +8,5 @@
 - Hot reloading
   `cd cmd ` && `air`
 
-- Watching templ and tailwind output
-  `templ generate --watch`
+- Watching tailwind output
   `tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch`
