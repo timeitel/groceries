@@ -1,0 +1,34 @@
+---
+name: Deploy to Cloud Run from source
+on:
+  push:
+    branches: [dev]
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  SERVICE: ${{ secrets.GCP_SERVICE_NAME }}
+  REGION: ${{ secrets.GCP_SERVICE_REGION }}
+  WIP: ${{ secrets.GCP_WIP }}
+jobs:
+  deploy:
+    permissions:
+      contents: read
+      id-token: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Google Auth
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.WIP }}
+          service_account: ${{ env.SERVICE }}
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: ${{ env.SERVICE }}
+          region: ${{ env.REGION }}
+          source: ./
+      - name: Use output
+        run: curl "${{ steps.deploy.outputs.url }}"
