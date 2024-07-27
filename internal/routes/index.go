@@ -6,7 +6,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-var items = []Item{{Name: "strawberry", Icon: "🍓"}, {Name: "banana", Icon: "🍌"}, {Icon: "🍎", Name: "apple"}, {Name: "nectarine", Icon: "🍑"}}
+var options = []Item{{Name: "strawberry", Icon: "🍓"}, {Name: "banana", Icon: "🍌"}, {Icon: "🍎", Name: "apple"}, {Name: "nectarine", Icon: "🍑"}}
 
 type Item struct {
 	Name string
@@ -19,6 +19,6 @@ type Data struct {
 }
 
 func Index(c echo.Context) error {
-	d := Data{Items: items, Name: "pat test"}
+	d := Data{Items: options, Name: "pat cooms"}
 	return c.Render(http.StatusOK, "index", d)
 }

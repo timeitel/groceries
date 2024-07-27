@@ -16,13 +16,13 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.Renderer = services.NewTemplate("../internal/views/**/*.html")
+	e.Renderer = services.NewTemplate("internal/views/*.html")
 
-	e.Static("/static", "../static/")
+	e.Static("/static", "static")
 
 	e.GET("/", routes.Index)
 
-	e.POST("/item/:id", routes.UpdateItem)
+	e.POST("/items/:name", routes.AddItem)
 
 	e.Logger.Fatal(e.Start(":3000"))
 }

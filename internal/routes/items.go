@@ -6,7 +6,10 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func UpdateItem(c echo.Context) error {
-	id := c.Param("id")
-	return c.String(http.StatusOK, id)
+var added = []string{}
+
+func AddItem(c echo.Context) error {
+	name := c.Param("name")
+	added = append(added, name)
+	return c.Render(http.StatusOK, "added", added)
 }

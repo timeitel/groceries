@@ -1,0 +1,30 @@
+{{ block "items" . }}
+<div class="flex flex-col gap-4">
+  <ul class="flex flex-wrap gap-4">
+    {{ range .Items }}
+    <li>
+      <button hx-post="/items/{{ .Name }}"
+              class="p-4 bg-green-400 rounded"
+              hx-target="#grocery-list">{{ .Name }} {{ .Icon }}</button>
+    </li>
+    {{ end }}
+  </ul>
+  <hr class="border-purple-700" />
+  <div id="grocery-list" /></div>
+{{ end }}
+{{ block "added" . }}
+<div id="grocery-list">
+  <ul>
+    {{ range $idx, $item := . }}
+    <li class="text-xl">
+      <input type="checkbox"
+             id="{{ $item }}-{{ $idx }}"
+             name="{{ $item }}-{{ $idx }}"
+             value="{{ $item }}">
+      <label for="{{ $item }}-{{ $idx }}">{{ $item }}</label>
+      <br>
+    </li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }}
