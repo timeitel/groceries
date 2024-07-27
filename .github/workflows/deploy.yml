@@ -4,12 +4,12 @@ on:
   push:
     branches: [dev]
 env:
-  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   SERVICE: ${{ secrets.GCP_SERVICE_NAME }}
   REGION: ${{ secrets.GCP_SERVICE_REGION }}
-  WIP: ${{ secrets.WIP }}
+  WIP: ${{ secrets.GCP_WIP }}
 jobs:
   deploy:
+    environment: dev
     permissions:
       contents: read
       id-token: write
@@ -20,11 +20,11 @@ jobs:
       - name: Google Auth
         uses: google-github-actions/auth@v2
         with:
-          service_account: cloud-run@side-projects-316313.iam.gserviceaccount.com
+          service_account: ${{ env.SERVICE }}
           workload_identity_provider: ${{ env.WIP }}
       - name: Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: groceries
-          region: asia-southeast1
+          region: ${{ env.REGION }}
           source: ./
