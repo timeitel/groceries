@@ -7,7 +7,7 @@ env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   SERVICE: ${{ secrets.GCP_SERVICE_NAME }}
   REGION: ${{ secrets.GCP_SERVICE_REGION }}
-  WIP: ${{ secrets.GCP_WIP }}
+  WIP: ${{ secrets.WIP }}
 jobs:
   deploy:
     permissions:
@@ -21,12 +21,10 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           service_account: cloud-run@side-projects-316313.iam.gserviceaccount.com
-          workload_identity_provider: projects/381794638537/locations/global/workloadIdentityPools/pool/providers/github-provider
+          workload_identity_provider: ${{ env.WIP }}
       - name: Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: groceries
           region: asia-southeast1
           source: ./
-      - name: Use output
-        run: curl "${{ steps.deploy.outputs.url }}"
