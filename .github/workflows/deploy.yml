@@ -18,17 +18,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Google Auth
-        id: auth
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: ${{ env.WIP }}
-          service_account: ${{ env.SERVICE }}
+          project_id: side-projects-316313
+          workload_identity_provider: projects/381794638537/locations/global/workloadIdentityPools/pool/providers/github-provider
       - name: Deploy to Cloud Run
-        id: deploy
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          service: ${{ env.SERVICE }}
-          region: ${{ env.REGION }}
+          service: cloud-run@side-projects-316313.iam.gserviceaccount.com
+          region: australia-southeast2
           source: ./
       - name: Use output
         run: curl "${{ steps.deploy.outputs.url }}"
