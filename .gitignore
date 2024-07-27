@@ -17,10 +17,6 @@
 # Go workspace file
 go.work
 
-# air build errors
-cmd/tmp
-
 # build artifacts
 static/css/output.css
-*_templ.go
-*_templ.txt
+tmp
