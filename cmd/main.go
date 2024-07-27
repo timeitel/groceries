@@ -24,5 +24,5 @@ func main() {
 
 	e.POST("/items/:name", routes.AddItem)
 
-	e.Logger.Fatal(e.Start(":3000"))
+	e.Logger.Fatal(e.Start(":8080"))
 }
