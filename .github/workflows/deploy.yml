@@ -20,12 +20,12 @@ jobs:
       - name: Google Auth
         uses: google-github-actions/auth@v2
         with:
-          project_id: side-projects-316313
+          service_account: cloud-run@side-projects-316313.iam.gserviceaccount.com
           workload_identity_provider: projects/381794638537/locations/global/workloadIdentityPools/pool/providers/github-provider
       - name: Deploy to Cloud Run
         uses: google-github-actions/deploy-cloudrun@v2
         with:
-          service: cloud-run@side-projects-316313.iam.gserviceaccount.com
+          service: groceries
           region: australia-southeast2
           source: ./
       - name: Use output
