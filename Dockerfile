@@ -1,8 +1,9 @@
 FROM node:lts-slim AS builder-node
 WORKDIR /src
-COPY . .
+COPY /static/css/ tailwind.config.js .
+COPY /internal/views/ ./internal/views/
 RUN npm i -g tailwindcss
-RUN tailwindcss -i ./static/css/input.css -o ./output.css --minify
+RUN tailwindcss -i ./input.css -o ./output.css --minify
 
 FROM golang:alpine as builder-go
 WORKDIR /app
