@@ -19,6 +19,6 @@ type Data struct {
 }
 
 func Index(c echo.Context) error {
-	d := Data{Items: options, Name: "pat cooms"}
+	d := Data{Items: options, Name: "Michael Connor"}
 	return c.Render(http.StatusOK, "index", d)
 }
