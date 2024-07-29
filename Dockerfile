@@ -1,6 +1,6 @@
 FROM node:lts-slim AS builder-node
 WORKDIR /src
-COPY /static/css/ tailwind.config.js .
+COPY /static/css/ tailwind.config.js ./
 COPY /internal/views/ ./internal/views/
 RUN npm i -g tailwindcss
 RUN tailwindcss -i ./input.css -o ./output.css --minify
