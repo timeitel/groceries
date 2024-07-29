@@ -8,7 +8,7 @@ RUN tailwindcss -i ./input.css -o ./output.css --minify
 FROM golang:alpine as builder-go
 WORKDIR /app
 ENV CGO_ENABLED=1
-COPY go.mod go.sum .
+COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
 RUN apk --no-cache add make git gcc libtool musl-dev ca-certificates dumb-init 
