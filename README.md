@@ -7,8 +7,4 @@
 
 ### Dev
 
-- Hot reloading
-  `air`
-
-- tailwind build watcher
-  `tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch`
+`docker compose up`
