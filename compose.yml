@@ -1,0 +1,14 @@
+---
+services:
+  groceries:
+    build:
+      context: .
+      target: dev
+    ports: [3000:8080]
+    volumes:
+      - ./:/app
+    # develop:
+    #   watch:
+    #     - action: rebuild
+    #       path: ./
+    #       target: /app/
