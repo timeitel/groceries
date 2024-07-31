@@ -10,10 +10,12 @@ RUN ./tailwindcss -i ./input.css -o ./output.css --minify
 
 FROM golang:1.22 AS dev
 WORKDIR /app
+RUN curl -sLo /usr/local/bin/tailwindcss https://github.com/tailwindlabs/tailwindcss/releases/download/v3.4.4/tailwindcss-linux-arm64
+RUN chmod +x /usr/local/bin/tailwindcss
 RUN go install github.com/air-verse/air@latest
-RUN curl -sLo tailwindcss https://github.com/tailwindlabs/tailwindcss/releases/download/v3.4.4/tailwindcss-linux-arm64
-RUN chmod +x tailwindcss
 CMD ["air"]
+# TODO: compare output of air vs go build, should be able to use this below
+# TODO: dockerignore
 
 FROM golang:alpine AS builder-go
 WORKDIR /out
