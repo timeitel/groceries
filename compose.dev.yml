@@ -1,6 +1,7 @@
 ---
 services:
   groceries:
+    image: groceries:dev
     build:
       context: .
       target: dev

@@ -7,4 +7,4 @@
 
 ### Dev
 
-`docker compose up`
+`docker compose -f compose.dev.yml up -d`
