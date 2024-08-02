@@ -1,12 +1,12 @@
 FROM golang:1.22 AS dev
 WORKDIR /app
 RUN go install github.com/air-verse/air@latest
-RUN curl -sLo /usr/local/bin/tailwindcss https://github.com/tailwindlabs/tailwindcss/releases/download/v3.4.4/tailwindcss-linux-arm64
+RUN curl -sLo /usr/local/bin/tailwindcss https://github.com/tailwindlabs/tailwindcss/releases/download/v3.4.7/tailwindcss-linux-x64
 RUN chmod +x /usr/local/bin/tailwindcss
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
-RUN ["/usr/local/bin/tailwindcss", "-i", "./static/css/input.css", "-o", "./static/css/output.css", "--minify"]
+RUN ["tailwindcss", "-i", "./static/css/input.css", "-o", "./static/css/output.css", "--minify"]
 CMD ["air"]
 
 FROM golang:alpine AS builder
