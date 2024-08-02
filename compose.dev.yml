@@ -15,9 +15,6 @@ services:
           path: ./internal
           target: /app/internal
         - action: sync
-          path: ./static/css/input.css
-          target: /app/static/css/input.css
-        - action: sync+restart
           path: ./.air.toml
           target: /app/.air.toml
         - action: rebuild
