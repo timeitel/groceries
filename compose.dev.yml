@@ -6,4 +6,21 @@ services:
       context: .
       target: dev
     ports: [3000:3000]
-    volumes: [./:/app]
+    develop:
+      watch:
+        - action: sync
+          path: ./cmd
+          target: /app/cmd
+        - action: sync
+          path: ./internal
+          target: /app/internal
+        - action: sync
+          path: ./static/css/input.css
+          target: /app/static/css/input.css
+        - action: sync+restart
+          path: ./.air.toml
+          target: /app/.air.toml
+        - action: rebuild
+          path: ./go.mod
+        - action: rebuild
+          path: ./go.sum
