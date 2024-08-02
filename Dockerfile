@@ -6,7 +6,7 @@ RUN chmod +x /usr/local/bin/tailwindcss
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
-RUN tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify
+RUN ["tailwindcss", "-i", "./static/css/input.css", "-o", "./static/css/output.css", "--minify"]
 CMD ["air"]
 
 FROM golang:alpine AS builder
