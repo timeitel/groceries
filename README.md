@@ -7,4 +7,4 @@
 
 ### Dev
 
-`docker compose -f compose.dev.yml up -d`
+`docker compose -f compose.dev.yml up --watch`
