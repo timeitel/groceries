@@ -1,0 +1,9 @@
+*.md
+.DS_Store
+.dockerignore
+Dockerfile
+compose*.yml
+.git
+.github
+.gitignore
+tmp
