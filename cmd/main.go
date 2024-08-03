@@ -8,8 +8,7 @@ import (
 )
 
 func main() {
-	db := services.InitDatabase()
-	defer db.Close()
+	services.InitDatabase()
 
 	e := echo.New()
 

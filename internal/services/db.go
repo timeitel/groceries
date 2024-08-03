@@ -2,35 +2,19 @@ package services
 
 import (
 	"database/sql"
-	"log"
+	"fmt"
+	"os"
 
-	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/tursodatabase/go-libsql"
 )
 
-type Item struct {
-	Id   int `json:"id"`
-	Name int `json:"name"`
-	Icon int `json:"icon"`
-}
+func InitDatabase() {
+	dbName := "file:./local.db"
 
-func InitDatabase() *sql.DB {
-	db, err := sql.Open("sqlite3", "../../main.db")
-
+	db, err := sql.Open("libsql", dbName)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Fprintf(os.Stderr, "failed to open db %s", err)
+		os.Exit(1)
 	}
-
-	_, err = db.Exec(`
-    CREATE TABLE IF NOT EXISTS items (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT,
-      icon TEXT
-    );
-    `)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return db
+	defer db.Close()
 }
