@@ -9,7 +9,7 @@ import (
 )
 
 func InitDatabase() {
-	dbName := "file:./local.db"
+	dbName := os.Getenv("DB_URL")
 
 	db, err := sql.Open("libsql", dbName)
 	if err != nil {
