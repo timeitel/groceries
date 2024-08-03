@@ -6,6 +6,10 @@ services:
       context: .
       target: dev
     ports: [3000:3000]
+    environment:
+      DB_URL: /run/secrets/db_url
+      DB_AUTH_TOKEN: /run/secrets/db_auth_token
+    secrets: [db_url, db_auth_token]
     develop:
       watch:
         - action: sync
@@ -21,3 +25,8 @@ services:
           path: ./go.mod
         - action: rebuild
           path: ./go.sum
+secrets:
+  db_url:
+    file: ./.secrets/db_url.txt
+  db_auth_token:
+    file: ./.secrets/db_auth_token.txt
