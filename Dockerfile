@@ -8,7 +8,7 @@ RUN go mod download
 RUN apt update && apt install sqlite3
 COPY . .
 RUN mkdir /data
-RUN sqlite3 /data/groceries.db < ./scripts/seed.sql
+RUN sqlite3 /data/groceries.db < ./scripts/schema.sql && sqlite3 /data/groceries.db < ./scripts/seed.sql
 RUN tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify
 CMD ["air"]
 
