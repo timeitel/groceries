@@ -1,5 +1,5 @@
 *.md
-.DS_Store
+**.DS_Store
 .dockerignore
 Dockerfile
 compose*.yml
