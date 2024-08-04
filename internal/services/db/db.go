@@ -27,6 +27,7 @@ func Init() *sql.DB {
 	db, err := sql.Open("libsql", url)
 	check(err)
 
+	// TODO: seed db / move to build / cache layer
 	const create string = `
   CREATE TABLE IF NOT EXISTS items (
   id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -37,11 +38,18 @@ func Init() *sql.DB {
 	_, err = db.Exec(create)
 	check(err)
 
-	const insert string = `
-  INSERT INTO items (name, description)
+	const insertApple string = `
+  INSERT OR IGNORE INTO items (name, description)
   VALUES ('Apple', 'A delicious fruit.');
   `
-	_, err = db.Exec(insert)
+	_, err = db.Exec(insertApple)
+	check(err)
+
+	const insertBanana string = `
+  INSERT OR IGNORE INTO items (name, description)
+  VALUES ('Banana', 'Another delicious fruit.');
+  `
+	_, err = db.Exec(insertBanana)
 	check(err)
 
 	return db
