@@ -5,7 +5,10 @@ RUN curl -sLo /usr/local/bin/tailwindcss https://github.com/tailwindlabs/tailwin
 RUN chmod +x /usr/local/bin/tailwindcss
 COPY go.mod go.sum ./
 RUN go mod download
+RUN apt update && apt install sqlite3
 COPY . .
+RUN mkdir /data
+RUN sqlite3 /data/groceries.db < ./scripts/seed.sql
 RUN tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify
 CMD ["air"]
 
