@@ -6,6 +6,9 @@ import (
 	"os"
 )
 
+type ItemRepository interface {
+	GetAll() (Items, error)
+}
 type Items []Item
 type Item struct {
 	ID          int
