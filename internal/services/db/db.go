@@ -30,11 +30,18 @@ func Init() *sql.DB {
 	const create string = `
   CREATE TABLE IF NOT EXISTS items (
   id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  name VARCHAR NOT NULL,
+  name VARCHAR NOT NULL UNIQUE,
   description TEXT
   );`
 
 	_, err = db.Exec(create)
+	check(err)
+
+	const insert string = `
+  INSERT INTO items (name, description)
+  VALUES ('Apple', 'A delicious fruit.');
+  `
+	_, err = db.Exec(insert)
 	check(err)
 
 	return db

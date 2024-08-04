@@ -10,12 +10,12 @@ import (
 
 func main() {
 	DB := db.Init()
-	db.QueryUsers(DB)
+	db.QueryItems(DB)
 	defer DB.Close()
 
 	e := echo.New()
 
-	e.Use(middleware.Logger())
+	// e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
 	e.Renderer = services.NewTemplate("internal/views/*.html")
