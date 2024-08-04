@@ -7,8 +7,7 @@ services:
       target: dev
     ports: [3000:3000]
     environment:
-      DB_URL_FILE: /run/secrets/db_url
-    secrets: [db_url]
+      DB_URL: file:/data/groceries.db
     volumes:
       - type: volume
         source: db
@@ -34,6 +33,3 @@ services:
           path: ./Dockerfile
 volumes:
   db:
-secrets:
-  db_url:
-    file: ./.secrets/db_url.txt

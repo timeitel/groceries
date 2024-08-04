@@ -15,7 +15,6 @@
 # vendor/
 
 go.work
-.secrets
 
 # build artifacts
 static/css/output.css
