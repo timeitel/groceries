@@ -5,10 +5,13 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/timeitel/groceries/internal/routes"
 	"github.com/timeitel/groceries/internal/services"
+	"github.com/timeitel/groceries/internal/services/db"
 )
 
 func main() {
-	services.InitDatabase()
+	DB := db.Init()
+	db.QueryUsers(DB)
+	defer DB.Close()
 
 	e := echo.New()
 
