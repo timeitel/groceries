@@ -6,4 +6,5 @@ compose*.yml
 .git
 .github
 .gitignore
+.secrets
 tmp
