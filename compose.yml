@@ -9,6 +9,10 @@ services:
     environment:
       DB_URL_FILE: /run/secrets/db_url
     secrets: [db_url]
+    volumes:
+      - type: volume
+        source: db
+        target: /data
     develop:
       watch:
         - action: sync
@@ -25,7 +29,11 @@ services:
         - action: rebuild
           path: ./go.sum
         - action: rebuild
-          path: ./compose.dev.yml
+          path: ./compose.yml
+        - action: rebuild
+          path: ./Dockerfile
+volumes:
+  db:
 secrets:
   db_url:
     file: ./.secrets/db_url.txt
