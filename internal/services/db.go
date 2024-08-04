@@ -1,20 +1,29 @@
 package services
 
 import (
+	"bufio"
 	"database/sql"
-	"fmt"
+	"log"
 	"os"
 
 	_ "github.com/tursodatabase/go-libsql"
 )
 
 func InitDatabase() {
-	dbName := os.Getenv("DB_URL")
+	path := os.Getenv("DB_URL_FILE")
 
-	db, err := sql.Open("libsql", dbName)
+	file, err := os.Open(path)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "failed to open db %s", err)
-		os.Exit(1)
+		log.Fatalf("Unable to get db url file: %s", path)
+	}
+
+	scanner := bufio.NewScanner(file)
+	scanner.Scan()
+	url := scanner.Text()
+
+	db, err := sql.Open("libsql", url)
+	if err != nil {
+		log.Fatalf("Failed to open db: %s", err)
 	}
 	defer db.Close()
 }
