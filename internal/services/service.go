@@ -8,11 +8,17 @@ import (
 	_ "github.com/tursodatabase/go-libsql"
 )
 
-type Service struct {
-	db *sql.DB
+type service struct {
+	conn *sql.DB
 }
 
-func Init() *sql.DB {
+func NewService() service {
+	return service{
+		conn: newLibSql(),
+	}
+}
+
+func newLibSql() *sql.DB {
 	url := os.Getenv("DB_URL")
 
 	db, err := sql.Open("libsql", url)
