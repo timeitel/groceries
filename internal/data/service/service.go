@@ -1,4 +1,4 @@
-package services
+package service
 
 import (
 	"database/sql"
@@ -12,7 +12,7 @@ type service struct {
 	conn *sql.DB
 }
 
-func NewService() service {
+func New() service {
 	return service{
 		conn: newLibSql(),
 	}

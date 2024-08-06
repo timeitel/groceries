@@ -3,20 +3,20 @@ package main
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/timeitel/groceries/internal/data/service"
 	"github.com/timeitel/groceries/internal/routes"
-	"github.com/timeitel/groceries/internal/services"
+	"github.com/timeitel/groceries/internal/views"
 )
 
 func main() {
-	// db.QueryItems(DB)
-	// defer DB.Close()
+	service := service.New()
 
 	e := echo.New()
 
 	// e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.Renderer = services.NewTemplate("internal/views/*.html")
+	e.Renderer = views.NewTemplate("internal/views/*.html")
 
 	e.Static("/static", "static")
 
