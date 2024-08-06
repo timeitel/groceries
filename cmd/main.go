@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	service := service.New()
+	service := service.New(service.NewLibSql())
 
 	e := echo.New()
 
