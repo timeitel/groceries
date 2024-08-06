@@ -6,11 +6,6 @@ import (
 	"os"
 )
 
-//	func New(db *sql.DB) service {
-//		return service{
-//			conn: db,
-//		}
-//	}
 func NewLibSql() *sql.DB {
 	url := os.Getenv("DB_URL")
 

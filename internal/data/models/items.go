@@ -1,10 +1,16 @@
-package db
+package models
 
 import (
 	"database/sql"
 	"fmt"
 	"os"
 )
+
+type Items []Item
+type Item struct {
+	Name string
+	Icon string
+}
 
 func (i Item) String() string {
 	return fmt.Sprintf("%d, %s, %s", i.ID, i.Name, i.Description)
