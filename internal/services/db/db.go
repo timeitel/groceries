@@ -8,6 +8,10 @@ import (
 	_ "github.com/tursodatabase/go-libsql"
 )
 
+type Service struct {
+	db *sql.DB
+}
+
 func Init() *sql.DB {
 	url := os.Getenv("DB_URL")
 
