@@ -8,6 +8,8 @@ services:
     ports: [3000:3000]
     environment:
       DB_URL: file:/data/groceries.db
+    # TODO: probably move to file secret and same process for prod
+    # Create file in GH actionsTODO: probably move to file secret and same process for prod
     volumes:
       - type: volume
         source: db
@@ -33,3 +35,5 @@ services:
           path: ./Dockerfile
 volumes:
   db:
+# secrets:
+# db_url:

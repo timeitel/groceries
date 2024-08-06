@@ -6,16 +6,6 @@ import (
 	"os"
 )
 
-type ItemRepository interface {
-	GetAll() (Items, error)
-}
-type Items []Item
-type Item struct {
-	ID          int
-	Name        string
-	Description string
-}
-
 func (i Item) String() string {
 	return fmt.Sprintf("%d, %s, %s", i.ID, i.Name, i.Description)
 }
