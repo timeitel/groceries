@@ -1,19 +1,22 @@
-package routes
+package home
 
 import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/timeitel/groceries/internal/models"
 )
 
-var options = []Item{{Name: "strawberry", Icon: "🍓"}, {Name: "banana", Icon: "🍌"}, {Icon: "🍎", Name: "apple"}, {Name: "nectarine", Icon: "🍑"}}
+var options = []models.Item{{Name: "strawberry", Icon: "🍓"}, {Name: "banana", Icon: "🍌"}, {Icon: "🍎", Name: "apple"}, {Name: "nectarine", Icon: "🍑"}}
 
 type Data struct {
-	Items []Item
+	Items []models.Item
 	Name  string
 }
 
-func Index(c echo.Context) error {
-	d := Data{Items: options, Name: "Michael Connor"}
-	return c.Render(http.StatusOK, "index", d)
+func Index(items models.Items) func(c echo.Context) error {
+	return func(c echo.Context) error {
+		d := Data{Items: items, Name: "Michael Connor"}
+		return c.Render(http.StatusOK, "index", d)
+	}
 }

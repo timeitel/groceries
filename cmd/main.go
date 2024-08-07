@@ -3,17 +3,16 @@ package main
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/timeitel/groceries/internal/data/db"
-	"github.com/timeitel/groceries/internal/data/repositories"
-	"github.com/timeitel/groceries/internal/data/services"
-	"github.com/timeitel/groceries/internal/routes"
+	"github.com/timeitel/groceries/internal/database"
+	"github.com/timeitel/groceries/internal/domain/user"
 	"github.com/timeitel/groceries/internal/views"
+	"github.com/timeitel/groceries/internal/views/home"
 )
 
 func main() {
-	DB := db.NewLibSql()
-	repo := repositories.NewUser(DB)
-	service := services.NewUser(repo)
+	db := database.NewLibSql()
+	repo := user.NewLibSqlRepository(db)
+	service := user.NewService(repo)
 
 	e := echo.New()
 
@@ -24,9 +23,9 @@ func main() {
 
 	e.Static("/static", "static")
 
-	e.GET("/", routes.Index)
+	e.GET("/", home.Index(service.GetItems()))
 
-	e.POST("/items/:name", routes.AddItem)
+	e.POST("/items/:name", home.AddItem)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }

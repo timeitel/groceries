@@ -3,7 +3,5 @@
 .dockerignore
 Dockerfile
 compose*.yml
-.git
-.github
-.gitignore
+.git*
 tmp
