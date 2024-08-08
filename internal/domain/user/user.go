@@ -1,10 +1,7 @@
 package user
 
-import "github.com/timeitel/groceries/internal/models"
-
 type User struct {
-	Id    int
-	Name  string
-	lists models.Lists
+	Id   int
+	Name string
 	// recipesl models.Recipes
 }

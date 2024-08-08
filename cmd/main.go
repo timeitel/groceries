@@ -4,7 +4,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/timeitel/groceries/internal/database"
-	"github.com/timeitel/groceries/internal/domain/user/libsql"
+	"github.com/timeitel/groceries/internal/domain/user"
 	"github.com/timeitel/groceries/internal/services"
 	"github.com/timeitel/groceries/internal/views"
 	"github.com/timeitel/groceries/internal/views/home"
@@ -12,7 +12,7 @@ import (
 
 func main() {
 	db := database.NewLibSql()
-	repo := libsql.NewUserRepository(db)
+	repo := user.NewLibSqlRepository(db)
 	service := services.NewShopping(repo)
 
 	e := echo.New()
@@ -24,7 +24,7 @@ func main() {
 
 	e.Static("/static", "static")
 
-	e.GET("/", home.Index(service.GetItems()))
+	e.GET("/", home.Index(service.GetHomeData()))
 
 	e.POST("/items/:name", home.AddItem)
 

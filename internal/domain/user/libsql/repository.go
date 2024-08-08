@@ -8,8 +8,6 @@ type Repository struct {
 	DB *sql.DB
 }
 
-func NewUserRepository(db *sql.DB) *Repository {
-	return &Repository{
-		db,
-	}
+func (r *Repository) GetUserName() (string, error) {
+	return "cool guy", nil
 }

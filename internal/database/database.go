@@ -7,7 +7,6 @@ import (
 )
 
 func NewLibSql() *sql.DB {
-
 	url := os.Getenv("DB_URL")
 
 	db, err := sql.Open("libsql", url)

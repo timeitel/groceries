@@ -2,21 +2,28 @@ package shopping
 
 import (
 	"github.com/timeitel/groceries/internal/domain/user"
-	"github.com/timeitel/groceries/internal/models"
+	"github.com/timeitel/groceries/internal/views/home"
 	_ "github.com/tursodatabase/go-libsql"
 )
 
-func NewService(repo user.Repository) Service {
+func NewService(repo user.RepoReader) Service {
 	return Service{
 		repo,
 	}
 }
 
 type Service struct {
-	Repo user.Repository
+	Repo user.RepoReader
 }
 
-func (s *Service) GetItems() models.Items {
+func (s *Service) GetHomeData() home.Data {
 	items, _ := s.Repo.GetItems()
-	return items
+	name, _ := s.Repo.GetUserName()
+
+	d := home.Data{
+		Items: items,
+		Name:  name,
+	}
+
+	return d
 }

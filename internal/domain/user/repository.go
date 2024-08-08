@@ -7,11 +7,12 @@ import (
 	"github.com/timeitel/groceries/internal/models"
 )
 
-type Repository interface {
+type RepoReader interface {
 	GetItems() (models.Items, error)
+	GetUserName() (string, error)
 }
 
-func NewLibSqlRepository(db *sql.DB) *libsql.Repository {
+func NewLibSqlRepository(db *sql.DB) RepoReader {
 	return &libsql.Repository{
 		DB: db,
 	}
