@@ -17,9 +17,3 @@ func NewLibSql() *sql.DB {
 
 	return db
 }
-
-// func (r *repository) addItem(userId string, itemId string) error {
-// 	_, err := r.db.Exec("INSERT INTO shopping_lists (userId, itemId) VALUES (?, ?)", userId, itemId)
-//
-// 	return err
-// }
