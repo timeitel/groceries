@@ -4,12 +4,12 @@ import (
 	"database/sql"
 )
 
-type UserRepository struct {
-	db *sql.DB
+type Repository struct {
+	DB *sql.DB
 }
 
-func NewUserRepository(db *sql.DB) *UserRepository {
-	return &UserRepository{
+func NewUserRepository(db *sql.DB) *Repository {
+	return &Repository{
 		db,
 	}
 }

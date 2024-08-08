@@ -5,7 +5,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/timeitel/groceries/internal/database"
 	"github.com/timeitel/groceries/internal/domain/user/libsql"
-	services "github.com/timeitel/groceries/internal/services/list"
+	"github.com/timeitel/groceries/internal/services"
 	"github.com/timeitel/groceries/internal/views"
 	"github.com/timeitel/groceries/internal/views/home"
 )
@@ -13,7 +13,7 @@ import (
 func main() {
 	db := database.NewLibSql()
 	repo := libsql.NewUserRepository(db)
-	service := services.NewList(repo)
+	service := services.NewShopping(repo)
 
 	e := echo.New()
 

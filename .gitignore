@@ -19,3 +19,4 @@ go.work
 # build artifacts
 static/css/output.css
 tmp
+main

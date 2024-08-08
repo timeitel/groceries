@@ -7,8 +7,8 @@ import (
 	"github.com/timeitel/groceries/internal/models"
 )
 
-func (r *UserRepository) GetItems() (models.Items, error) {
-	rows, err := r.db.Query("SELECT * FROM items")
+func (r *Repository) GetItems() (models.Items, error) {
+	rows, err := r.DB.Query("SELECT * FROM items")
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "failed to execute query: %v\n", err)
 		os.Exit(1)
