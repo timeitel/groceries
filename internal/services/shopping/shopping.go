@@ -27,3 +27,7 @@ func (s *Service) GetHomeData() home.Data {
 
 	return d
 }
+
+func (s *Service) AddItem(id string) error {
+	return nil
+}

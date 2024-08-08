@@ -8,8 +8,17 @@ import (
 
 var added = []string{}
 
-func AddItem(c echo.Context) error {
-	name := c.Param("name")
-	added = append(added, name)
-	return c.Render(http.StatusOK, "added", added)
+type addItemFn func(id string) error
+
+func AddItem(addItem addItemFn) func(c echo.Context) error {
+	return func(c echo.Context) error {
+		id := c.Param("id")
+
+		err := addItem(id)
+		if err != nil {
+			return c.Render(http.StatusBadRequest, "", nil)
+		}
+
+		return c.Render(http.StatusOK, "added", added)
+	}
 }
