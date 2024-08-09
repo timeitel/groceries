@@ -18,7 +18,7 @@ func main() {
 	// e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.Renderer = views.NewTemplate("internal/views/*.html")
+	e.Renderer = views.NewTemplate("internal/views/**/*.html")
 
 	e.Static("/static", "static")
 
