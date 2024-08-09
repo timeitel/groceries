@@ -1,17 +1,17 @@
-package user
+package shopper
 
 import (
 	"database/sql"
 	"log"
 	"os"
 
-	"github.com/timeitel/groceries/internal/domain/user/libsql"
-	"github.com/timeitel/groceries/internal/models"
+	"github.com/timeitel/groceries/internal/domain/shopper/libsql"
+	"github.com/timeitel/groceries/internal/types/models"
 )
 
 type RepoReader interface {
 	GetItems() (models.Items, error)
-	GetUserName() (string, error)
+	GetUser() (models.User, error)
 }
 
 func NewLibSqlRepository() RepoReader {

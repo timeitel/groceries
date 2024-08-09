@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/timeitel/groceries/internal/models"
+	"github.com/timeitel/groceries/internal/types/models"
 )
 
 func (r *Repository) GetItems() (models.Items, error) {
@@ -20,7 +20,7 @@ func (r *Repository) GetItems() (models.Items, error) {
 	for rows.Next() {
 		var item models.Item
 
-		if err := rows.Scan(&item.Id, &item.Name, &item.Icon); err != nil {
+		if err := rows.Scan(&item.Id, &item.Name); err != nil {
 			fmt.Println("Error scanning row:", err)
 			return nil, err
 		}

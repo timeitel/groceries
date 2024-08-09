@@ -1,12 +1,12 @@
 package services
 
 import (
-	"github.com/timeitel/groceries/internal/domain/user"
-	"github.com/timeitel/groceries/internal/services/shopping"
+	"github.com/timeitel/groceries/internal/domain/shopper"
+	"github.com/timeitel/groceries/internal/services/user"
 )
 
-func NewShopping(repo user.RepoReader) shopping.Service {
-	return shopping.Service{
+func NewUser(repo shopper.RepoReader) user.Service {
+	return user.Service{
 		Repo: repo,
 	}
 }

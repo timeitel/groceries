@@ -4,11 +4,11 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github.com/timeitel/groceries/internal/models"
+	"github.com/timeitel/groceries/internal/types/models"
 )
 
 type Data struct {
-	Items []models.Item
+	Items models.Items
 	Name  string
 }
 

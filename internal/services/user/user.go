@@ -1,28 +1,28 @@
-package shopping
+package user
 
 import (
-	"github.com/timeitel/groceries/internal/domain/user"
+	"github.com/timeitel/groceries/internal/domain/shopper"
 	"github.com/timeitel/groceries/internal/views/home"
 	_ "github.com/tursodatabase/go-libsql"
 )
 
-func NewService(repo user.RepoReader) Service {
+func NewService(repo shopper.RepoReader) Service {
 	return Service{
 		repo,
 	}
 }
 
 type Service struct {
-	Repo user.RepoReader
+	Repo shopper.RepoReader
 }
 
-func (s *Service) GetHomeData() home.Data {
+func (s *Service) GetHomeData(jwt string) home.Data {
 	items, _ := s.Repo.GetItems()
-	name, _ := s.Repo.GetUserName()
+	user, _ := s.Repo.GetUser()
 
 	d := home.Data{
 		Items: items,
-		Name:  name,
+		Name:  user.Name,
 	}
 
 	return d
