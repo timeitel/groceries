@@ -10,7 +10,7 @@ var added = []string{}
 
 type addItemFn func(id string) error
 
-func AddItem(addItem addItemFn) func(c echo.Context) error {
+func AddItem(addItem addItemFn) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		id := c.Param("id")
 

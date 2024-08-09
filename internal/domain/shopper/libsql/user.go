@@ -1,6 +1,6 @@
 package libsql
 
-import "github.com/timeitel/groceries/internal/types/models"
+import "github.com/timeitel/groceries/internal/common/models"
 
 func (r *Repository) GetUser() (models.User, error) {
 	r.DB.QueryRow("")

@@ -22,7 +22,7 @@ func main() {
 
 	e.Static("/static", "static")
 
-	e.GET("/", home.Index(service.GetHomeData()))
+	e.GET("/", home.Index(service.GetCart))
 
 	e.POST("/items/:name", home.AddItem(service.AddItem))
 

@@ -1,8 +1,8 @@
 package shopper
 
-import "github.com/timeitel/groceries/internal/types/models"
+import "github.com/timeitel/groceries/internal/common/models"
 
-type Aggregate struct {
+type Shopper struct {
 	User       models.User // root
 	activeCart models.Cart
 }

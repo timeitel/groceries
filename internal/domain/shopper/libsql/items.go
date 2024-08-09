@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/timeitel/groceries/internal/types/models"
+	"github.com/timeitel/groceries/internal/common/models"
 )
 
 func (r *Repository) GetItems() (models.Items, error) {

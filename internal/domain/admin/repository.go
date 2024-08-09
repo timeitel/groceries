@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/timeitel/groceries/internal/domain/shopping/libsql"
-	"github.com/timeitel/groceries/internal/types/models"
+	"github.com/timeitel/groceries/internal/common/models"
+	"github.com/timeitel/groceries/internal/domain/shopper/libsql"
 )
 
 type RepoReader interface {

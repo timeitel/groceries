@@ -16,7 +16,7 @@ type Service struct {
 	Repo shopper.RepoReader
 }
 
-func (s *Service) GetHomeData(jwt string) home.Data {
+func (s *Service) GetCart(jwt string) home.Data {
 	items, _ := s.Repo.GetItems()
 	user, _ := s.Repo.GetUser()
 
