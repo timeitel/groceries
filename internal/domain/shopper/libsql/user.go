@@ -14,19 +14,19 @@ func (r *Repository) GetUser() (models.User, error) {
 
 	var id string
 	var name string
-	var isAdmin bool
+	var isAdminInt int
 
-	err := row.Scan(&id, &name, &isAdmin)
+	err := row.Scan(&id, &name, &isAdminInt)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("USER: %s, %s %b \n", id, name, isAdmin)
+	fmt.Printf("USER: %s, %s %d \n", id, name, isAdminInt)
 
 	user := models.User{
 		Id:      id,
 		Name:    name,
-		IsAdmin: isAdmin,
+		IsAdmin: isAdminInt == 1,
 	}
 
 	return user, nil
