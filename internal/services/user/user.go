@@ -18,7 +18,7 @@ type Service struct {
 	Repo shopper.RepoReadWriter
 }
 
-func (s *Service) GetCart(jwt string) home.Data {
+func (s *Service) GetHomeData(jwt string) home.Data {
 	products, _ := s.Repo.GetProducts()
 	user, _ := s.Repo.GetUser()
 
@@ -30,7 +30,7 @@ func (s *Service) GetCart(jwt string) home.Data {
 	return d
 }
 
-func (s *Service) AddItem(id string) error {
+func (s *Service) AddProduct(id string) error {
 	user, _ := s.Repo.GetUser()
 	fmt.Println(user)
 

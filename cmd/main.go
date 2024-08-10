@@ -20,9 +20,9 @@ func main() {
 
 	e.Static("/static", "static")
 
-	e.GET("/", home.Index(service.GetCart))
+	e.GET("/", home.Index(service.GetHomeData))
 
-	e.POST("/products/:id", home.AddProduct(service.AddItem))
+	e.POST("/products/:id", home.AddProduct(service.AddProduct))
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
