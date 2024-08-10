@@ -8,8 +8,8 @@ import (
 )
 
 type Data struct {
-	Items models.Items
-	Name  string
+	Products models.Products
+	Name     string
 }
 
 type getDataFn func(jwt string) Data

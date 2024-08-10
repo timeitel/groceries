@@ -12,6 +12,6 @@ type Cart struct {
 type CartItems []CartItem
 
 type CartItem struct {
-	ItemId   string
-	Quantity int
+	ProductId string
+	Quantity  int
 }

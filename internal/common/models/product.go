@@ -1,8 +1,8 @@
 package models
 
-type Items []Item
+type Products []Product
 
-type Item struct {
+type Product struct {
 	Id          string
 	Name        string
 	Description string

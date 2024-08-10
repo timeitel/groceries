@@ -5,12 +5,11 @@ import (
 	"log"
 	"os"
 
-	"github.com/timeitel/groceries/internal/common/models"
 	"github.com/timeitel/groceries/internal/domain/shopper/libsql"
 )
 
 type RepoReader interface {
-	GetItems() (models.Items, error)
+	GetProducts() (models.products, error)
 }
 
 func NewLibSqlRepository() RepoReader {

@@ -10,9 +10,9 @@ import (
 )
 
 type RepoReadWriter interface {
-	GetItems() (models.Items, error)
+	GetProducts() (models.Products, error)
 	GetUser() (models.User, error)
-	AddItem(id string) (models.Item, error)
+	AddProduct(id string) (models.Product, error)
 }
 
 func NewLibSqlRepository() RepoReadWriter {

@@ -8,9 +8,9 @@ import (
 
 var added = []string{}
 
-type addItemFn func(id string) error
+type addProductFn func(id string) error
 
-func AddItem(addItem addItemFn) echo.HandlerFunc {
+func AddProduct(addItem addProductFn) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		id := c.Param("id")
 

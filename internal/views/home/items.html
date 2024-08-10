@@ -1,9 +1,9 @@
-{{ block "items" . }}
+{{ block "products" . }}
 <div class="flex flex-col gap-4">
   <ul class="flex flex-wrap gap-4">
-    {{ range .Items }}
+    {{ range .products }}
     <li>
-      <button hx-post="/items/{{ .Id }}"
+      <button hx-post="/products/{{ .Id }}"
               class="p-4 bg-green-400 rounded"
               hx-target="#grocery-list">
         <strong>{{ .Name }}</strong>

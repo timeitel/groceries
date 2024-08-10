@@ -1,6 +1,8 @@
 package user
 
 import (
+	"fmt"
+
 	"github.com/timeitel/groceries/internal/domain/shopper"
 	"github.com/timeitel/groceries/internal/views/home"
 	_ "github.com/tursodatabase/go-libsql"
@@ -17,12 +19,12 @@ type Service struct {
 }
 
 func (s *Service) GetCart(jwt string) home.Data {
-	items, _ := s.Repo.GetItems()
+	products, _ := s.Repo.GetProducts()
 	user, _ := s.Repo.GetUser()
 
 	d := home.Data{
-		Items: items,
-		Name:  user.Name,
+		Products: products,
+		Name:     user.Name,
 	}
 
 	return d
@@ -30,6 +32,7 @@ func (s *Service) GetCart(jwt string) home.Data {
 
 func (s *Service) AddItem(id string) error {
 	user, _ := s.Repo.GetUser()
+	fmt.Println(user)
 
 	return nil
 }

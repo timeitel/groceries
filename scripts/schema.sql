@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS items (
+CREATE TABLE IF NOT EXISTS products (
   id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
   name VARCHAR NOT NULL UNIQUE,
   description TEXT
@@ -11,16 +11,16 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS cart_items (
-  item_id INTEGER,
+  product_id INTEGER,
   cart_id INTEGER,
   quantity INTEGER DEFAULT 1
 );
 
 CREATE TABLE IF NOT EXISTS carts (
   id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  item_id INTEGER,
+  product_id INTEGER,
   user_id INTEGER,
-  FOREIGN KEY (item_id) REFERENCES items(item_id),
+  FOREIGN KEY (product_id) REFERENCES products(product_id),
   FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
