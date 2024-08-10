@@ -3,6 +3,7 @@ package models
 type Items []Item
 
 type Item struct {
-	Id   string
-	Name string
+	Id          string
+	Name        string
+	Description string
 }
