@@ -5,7 +5,10 @@
     <li>
       <button hx-post="/items/{{ .Name }}"
               class="p-4 bg-green-400 rounded"
-              hx-target="#grocery-list">{{ .Name }} {{ .Icon }}</button>
+              hx-target="#grocery-list">
+        <strong>{{ .Name }}</strong>
+        <p>{{ .Description }}</p>
+      </button>
     </li>
     {{ end }}
   </ul>

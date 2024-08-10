@@ -14,11 +14,9 @@ func main() {
 	service := services.NewUser(shopperRepo)
 
 	e := echo.New()
-
-	// e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
-
 	e.Renderer = views.NewTemplate("internal/views/**/*.html")
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
 
 	e.Static("/static", "static")
 

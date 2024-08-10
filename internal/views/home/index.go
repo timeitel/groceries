@@ -17,7 +17,8 @@ type getDataFn func(jwt string) Data
 func Index(getData getDataFn) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		// jwt := c.Param("jwt")
-		data := getData("jwt")
+		// data := getData("jwt")
+		data := getData("asdasd")
 
 		return c.Render(http.StatusOK, "index", data)
 	}
