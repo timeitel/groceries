@@ -22,7 +22,7 @@ func main() {
 
 	e.GET("/", home.Index(service.GetCart))
 
-	e.POST("/items/:name", home.AddItem(service.AddItem))
+	e.POST("/items/:id", home.AddItem(service.AddItem))
 
 	e.Logger.Fatal(e.Start(":8080"))
 }

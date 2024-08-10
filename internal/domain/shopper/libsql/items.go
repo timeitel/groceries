@@ -34,3 +34,11 @@ func (r *Repository) GetItems() (models.Items, error) {
 
 	return items, nil
 }
+
+func (r *Repository) AddItem(id string) (models.Item, error) {
+	rows, err := r.DB.Query("SELECT * FROM items")
+
+	var item models.Item
+
+	return item, nil
+}

@@ -3,7 +3,7 @@
   <ul class="flex flex-wrap gap-4">
     {{ range .Items }}
     <li>
-      <button hx-post="/items/{{ .Name }}"
+      <button hx-post="/items/{{ .Id }}"
               class="p-4 bg-green-400 rounded"
               hx-target="#grocery-list">
         <strong>{{ .Name }}</strong>

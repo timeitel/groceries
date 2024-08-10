@@ -16,7 +16,7 @@ func AddItem(addItem addItemFn) echo.HandlerFunc {
 
 		err := addItem(id)
 		if err != nil {
-			return c.Render(http.StatusBadRequest, "", nil)
+			return echo.NewHTTPError(http.StatusBadRequest)
 		}
 
 		return c.Render(http.StatusOK, "added", added)

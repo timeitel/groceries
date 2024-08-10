@@ -9,12 +9,13 @@ import (
 	"github.com/timeitel/groceries/internal/domain/shopper/libsql"
 )
 
-type RepoReader interface {
+type RepoReadWriter interface {
 	GetItems() (models.Items, error)
 	GetUser() (models.User, error)
+	AddItem(id string) (models.Item, error)
 }
 
-func NewLibSqlRepository() RepoReader {
+func NewLibSqlRepository() RepoReadWriter {
 	url := os.Getenv("DB_URL")
 
 	db, err := sql.Open("libsql", url)

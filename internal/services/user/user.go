@@ -6,14 +6,14 @@ import (
 	_ "github.com/tursodatabase/go-libsql"
 )
 
-func NewService(repo shopper.RepoReader) Service {
+func NewService(repo shopper.RepoReadWriter) Service {
 	return Service{
 		repo,
 	}
 }
 
 type Service struct {
-	Repo shopper.RepoReader
+	Repo shopper.RepoReadWriter
 }
 
 func (s *Service) GetCart(jwt string) home.Data {
@@ -29,5 +29,7 @@ func (s *Service) GetCart(jwt string) home.Data {
 }
 
 func (s *Service) AddItem(id string) error {
+	user, _ := s.Repo.GetUser()
+
 	return nil
 }
