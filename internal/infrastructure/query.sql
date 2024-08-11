@@ -9,4 +9,3 @@ VALUES ('Cool guy', 1);
 
 INSERT OR IGNORE INTO carts (product_id, user_id)
 VALUES (1, 1);
-

@@ -18,18 +18,18 @@ func (r *Repository) GetProducts() (models.Products, error) {
 	var products models.Products
 
 	for rows.Next() {
-		var item models.Product
+		var p models.Product
 
-		if err := rows.Scan(&item.Id, &item.Name, &item.Description); err != nil {
-			fmt.Println("Error scanning row:", err)
+		if err := rows.Scan(&p.Id, &p.Name, &p.Description); err != nil {
+			fmt.Printf("Error scanning row: %v", err)
 			return nil, err
 		}
 
-		products = append(products, item)
+		products = append(products, p)
 	}
 
 	if err := rows.Err(); err != nil {
-		fmt.Println("Error during rows iteration:", err)
+		fmt.Printf("Error in rows: %v", err)
 	}
 
 	return products, nil
