@@ -19,7 +19,7 @@ COPY go.mod go.sum ./
 RUN go mod download
 COPY . ./
 RUN apk --no-cache add make git gcc libtool musl-dev ca-certificates dumb-init 
-RUN go build -o ./main ./cmd
+RUN go build -o ./main ./cmd/web
 
 FROM alpine:3.20 AS runner
 WORKDIR /app

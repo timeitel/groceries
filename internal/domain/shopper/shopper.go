@@ -1,8 +1,10 @@
 package shopper
 
-import "github.com/timeitel/groceries/internal/common/models"
+import (
+	"github.com/timeitel/groceries/internal/infrastructure/data/db"
+)
 
 type Shopper struct {
-	User       models.User // root
-	activeCart models.Cart
+	User       db.User
+	ActiveCart db.Cart
 }

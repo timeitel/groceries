@@ -1,9 +1,7 @@
 package libsql
 
-import (
-	"database/sql"
-)
+import "github.com/timeitel/groceries/internal/infrastructure/data/db"
 
 type Repository struct {
-	DB *sql.DB
+	DB *db.Queries
 }

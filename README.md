@@ -4,6 +4,8 @@
 - go
 - sqlite
 - docker
+- libsql / sqlite (sqlc)
+- migrations (goose)
 
 ### Dev
 
