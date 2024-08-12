@@ -4,6 +4,12 @@ INSERT INTO products (name, description)
 RETURNING
     *;
 
+-- name: GetProducts :many
+SELECT
+    *
+FROM
+    products;
+
 -- name: CreateUser :one
 INSERT INTO users (name)
     VALUES (?)

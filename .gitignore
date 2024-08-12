@@ -20,3 +20,4 @@ go.work
 static/css/output.css
 tmp
 main
+internal/infrastructure/data/db

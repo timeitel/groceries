@@ -1,7 +1,13 @@
 package models
 
-import "github.com/timeitel/groceries/internal/infrastructure/data"
+import (
+	"database/sql"
 
-type Products []data.Product
-type CartItems []data.CartItem
-type Carts []data.Cart
+	"github.com/timeitel/groceries/internal/infrastructure/data/db"
+)
+
+type Products []db.Product
+type CartItems []db.CartItem
+type Carts []db.Cart
+
+type SqlInt = sql.NullInt64

@@ -90,3 +90,49 @@ func (q *Queries) CreateUser(ctx context.Context, name string) (User, error) {
 	err := row.Scan(&i.ID, &i.Name, &i.IsAdmin)
 	return i, err
 }
+
+const getProducts = `-- name: GetProducts :many
+SELECT
+    id, name, description
+FROM
+    products
+`
+
+func (q *Queries) GetProducts(ctx context.Context) ([]Product, error) {
+	rows, err := q.db.QueryContext(ctx, getProducts)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Product
+	for rows.Next() {
+		var i Product
+		if err := rows.Scan(&i.ID, &i.Name, &i.Description); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const getUser = `-- name: GetUser :one
+SELECT
+    id, name, is_admin
+FROM
+    users
+WHERE
+    id = ?
+`
+
+func (q *Queries) GetUser(ctx context.Context, id int64) (User, error) {
+	row := q.db.QueryRowContext(ctx, getUser, id)
+	var i User
+	err := row.Scan(&i.ID, &i.Name, &i.IsAdmin)
+	return i, err
+}

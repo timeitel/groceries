@@ -1,12 +1,11 @@
 package libsql
 
 import (
+	"context"
 	"fmt"
 	"log"
-	"os"
 
 	"github.com/timeitel/groceries/internal/common/models"
-	"github.com/timeitel/groceries/internal/infrastructure/data"
 	"github.com/timeitel/groceries/internal/infrastructure/data/db"
 )
 
@@ -21,37 +20,27 @@ func (r *Repository) GetUser() (db.User, error) {
 }
 
 func (r *Repository) GetProducts() (models.Products, error) {
-	rows, err := r.DB.Query("SELECT * FROM products")
+	p, err := r.DB.GetProducts(context.Background())
+
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "failed to execute query: %v\n", err)
-		os.Exit(1)
-	}
-	defer rows.Close()
-
-	var products models.Products
-
-	for rows.Next() {
-		var p data.Product
-
-		if err := rows.Scan(&p.Id, &p.Name, &p.Description); err != nil {
-			fmt.Printf("Error scanning row: %v", err)
-			return nil, err
-		}
-
-		products = append(products, p)
+		fmt.Println("Unable to get products", err)
+		return nil, err
 	}
 
-	if err := rows.Err(); err != nil {
-		fmt.Printf("Error in rows: %v", err)
-	}
-
-	return products, nil
+	return p, nil
 }
 
-func (r *Repository) AddProduct(id string) (models.Product, error) {
-	// rows, err := r.DB.Query("SELECT * FROM products")
-	//
-	var item models.Product
+func (r *Repository) AddProductToCart(productId, cartId, quantity models.SqlInt) error {
+	params := db.AddCartItemParams{
+		CartID: cartId, ProductID: productId, Quantity: quantity,
+	}
 
-	return item, nil
+	_, err := r.DB.AddCartItem(context.Background(), params)
+
+	if err != nil {
+		fmt.Println("Unable to add product to cart", err)
+		return err
+	}
+
+	return nil
 }

@@ -10,13 +10,13 @@ import (
 type RepoReadWriter interface {
 	GetProducts() (models.Products, error)
 	GetUser() (db.User, error)
-	AddProduct(id string) (db.Product, error)
+	AddProductToCart(productId, cartId, quantity models.SqlInt) error
 }
 
 func NewLibSqlRepository() RepoReadWriter {
-	DB := data.NewLibSqlQueries()
+	conn := data.NewLibSqlQueries()
 
 	return &libsql.Repository{
-		DB,
+		DB: conn,
 	}
 }
