@@ -8,14 +8,13 @@ import (
 
 var added = []string{}
 
-type addProductFn func(id string) error
+type addProductFn func(productID int, quantity int) error
 
 func AddProductToCart(addItem addProductFn) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		id := c.Param("id")
+		// id := c.Param("id")
 
-		err := addItem(id)
-		if err != nil {
+		if err := addItem(1, 1); err != nil {
 			return echo.NewHTTPError(http.StatusBadRequest)
 		}
 

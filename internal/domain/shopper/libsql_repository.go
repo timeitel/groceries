@@ -1,7 +1,7 @@
 package shopper
 
 import (
-	"github.com/timeitel/groceries/internal/common/models"
+	"github.com/timeitel/groceries/internal/common/types"
 	"github.com/timeitel/groceries/internal/infrastructure/data"
 	"github.com/timeitel/groceries/internal/infrastructure/data/db"
 )
@@ -11,9 +11,9 @@ type libSqlRepository struct {
 }
 
 type ReadWriter interface {
-	GetProducts() (models.Products, error)
+	GetProducts() (types.Products, error)
 	GetShopper() (shopper, error)
-	AddProductToCart(productId, cartId, quantity int) error
+	AddProductToCart(productId, quantity int) error
 }
 
 func NewLibSqlRepository() ReadWriter {

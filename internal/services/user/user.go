@@ -45,7 +45,7 @@ func (s *Service) AddProductToCart(productID int, quantity int) error {
 		return err
 	}
 
-	if err = s.Repo.AddProductToCart(productID, user.User.ActiveCartID, 1); err != nil {
+	if err = s.Repo.AddProductToCart(productID, 1); err != nil {
 		fmt.Println(err)
 		return err
 	}

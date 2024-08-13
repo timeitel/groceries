@@ -6,5 +6,5 @@ FROM
     users
     JOIN carts ON carts.user_id = users.id
 WHERE
-    users.id = ?;
+    users.id = 1;
 

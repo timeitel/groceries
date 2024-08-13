@@ -4,13 +4,12 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/timeitel/groceries/internal/common/models"
 	"github.com/timeitel/groceries/internal/common/types"
 	"github.com/timeitel/groceries/internal/infrastructure/data/db"
 )
 
 func (r *libSqlRepository) AddProductToCart(productId, quantity int) error {
-	res, err := r.db.GetShopper()
+	res, err := r.db.GetShopper(context.Background())
 	if err != nil {
 		fmt.Println("Shopper", err)
 		return err
@@ -19,7 +18,7 @@ func (r *libSqlRepository) AddProductToCart(productId, quantity int) error {
 	params := db.AddCartItemParams{
 		CartID:    res.User.ActiveCartID,
 		ProductID: types.NewSqlInt(productId),
-		Quantity:  models.NewSqlInt(quantity),
+		Quantity:  types.NewSqlInt(quantity),
 	}
 
 	if _, err = r.db.AddCartItem(context.Background(), params); err != nil {
