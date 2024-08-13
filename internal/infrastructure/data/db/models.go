@@ -26,7 +26,8 @@ type Product struct {
 }
 
 type User struct {
-	ID      int64
-	Name    string
-	IsAdmin sql.NullInt64
+	ID           int64
+	Name         string
+	IsAdmin      sql.NullInt64
+	ActiveCartID sql.NullInt64
 }

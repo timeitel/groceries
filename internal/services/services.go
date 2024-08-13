@@ -5,7 +5,7 @@ import (
 	"github.com/timeitel/groceries/internal/services/user"
 )
 
-func NewUser(repo shopper.RepoReadWriter) user.Service {
+func NewUser(repo shopper.ReadWriter) user.Service {
 	return user.Service{
 		Repo: repo,
 	}

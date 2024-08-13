@@ -10,7 +10,7 @@ var added = []string{}
 
 type addProductFn func(id string) error
 
-func AddProduct(addItem addProductFn) echo.HandlerFunc {
+func AddProductToCart(addItem addProductFn) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		id := c.Param("id")
 

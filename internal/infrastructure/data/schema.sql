@@ -7,7 +7,9 @@ CREATE TABLE products (
 CREATE TABLE users (
     id integer PRIMARY KEY AUTOINCREMENT,
     name varchar NOT NULL,
-    is_admin integer DEFAULT 0
+    is_admin integer DEFAULT 0,
+    active_cart_id integer DEFAULT 1,
+    FOREIGN KEY (active_cart_id) REFERENCES carts (id)
 );
 
 CREATE TABLE cart_items (

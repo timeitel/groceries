@@ -9,7 +9,7 @@ import (
 	_ "github.com/tursodatabase/go-libsql"
 )
 
-func NewLibSqlQueries() *db.Queries {
+func NewLibSqlDB() *db.Queries {
 	url := os.Getenv("DB_URL")
 
 	conn, err := sql.Open("libsql", url)
