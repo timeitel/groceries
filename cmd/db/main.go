@@ -7,12 +7,15 @@ import (
 	"log"
 	"os"
 
-	_ "github.com/timeitel/groceries/internal/domain/shopper/libsql"
+	_ "github.com/tursodatabase/go-libsql"
 )
 
 func main() {
 	ctx := context.Background()
-	url := os.Getenv("DB_URL")
+	url, exists := os.LookupEnv("DB_URL")
+	if !exists {
+		log.Fatalln("No env set under DB_URL")
+	}
 
 	db, err := sql.Open("libsql", url)
 	if err != nil {
@@ -21,7 +24,7 @@ func main() {
 
 	res, err := db.ExecContext(ctx, "schema.sql")
 	if err != nil {
-		log.Fatal("Unable to create schema", err)
+		log.Fatalln("Unable to create schema", err)
 	}
 
 	// lastInsertId, err := res.LastInsertId()
