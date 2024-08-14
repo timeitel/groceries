@@ -10,13 +10,13 @@ type libSqlRepository struct {
 	db *db.Queries
 }
 
-type ReadWriter interface {
+type RepoReadWriter interface {
 	GetProducts() (types.Products, error)
 	GetShopper() (shopper, error)
 	AddProductToCart(productId, quantity int) error
 }
 
-func NewLibSqlRepository() ReadWriter {
+func NewLibSqlRepository() RepoReadWriter {
 	conn := data.NewLibSqlDB()
 
 	return &libSqlRepository{

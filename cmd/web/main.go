@@ -20,9 +20,13 @@ func main() {
 
 	e.Static("/static", "static")
 
-	e.GET("/", home.Index(service.GetHomeData))
+	e.GET("/", func(c echo.Context) error {
+		return home.HomeHandler(c, &service)
+	})
 
-	e.POST("/products/:id", home.AddProductToCart(service.AddProductToCart))
+	e.POST("/products/:id", func(c echo.Context) error {
+		return home.AddProductToCartHandler(c, &service)
+	})
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
