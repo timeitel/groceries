@@ -1,7 +1,6 @@
 package home
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
@@ -21,7 +20,6 @@ func HomeHandler(c echo.Context, service *services.User) error {
 	if err != nil {
 		log.Fatalln("getting products")
 	}
-	fmt.Print(products)
 
 	data := data{
 		Products: products,
