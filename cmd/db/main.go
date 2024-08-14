@@ -27,19 +27,8 @@ func main() {
 		log.Fatalln("Unable to create schema", err)
 	}
 
-	// lastInsertId, err := res.LastInsertId()
-	// if err != nil {
-	// 	fmt.Printf("Error getting last insert ID: %v\n", err)
-	// 	return
-	// }
-	//
-	// rowsAffected, err := res.RowsAffected()
-	// if err != nil {
-	// 	fmt.Printf("Error getting rows affected: %v\n", err)
-	// 	return
-	// }
-	//
-	// fmt.Printf("Last Insert ID: %d\n", lastInsertId)
+	// TODO: db seeding for products and admin user
+
 	fmt.Printf("Rows Affected: %d\n", res)
 	fmt.Printf("Created database schema")
 }
