@@ -13,11 +13,6 @@
             <header class="px-4 bg-green-200">
                 Hey {{ .Name }}, heres your shopping list
             </header>
-            {{ if .IsAdmin }}
-            <nav>
-                admin here {{ .Name }}
-            </nav>
-            {{ end }}
             <div class="p-4">{{ template "products" .Products }}</div>
         </main>
     </body>

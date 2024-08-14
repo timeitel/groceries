@@ -11,7 +11,6 @@ import (
 
 type data struct {
 	Products types.Products
-	IsAdmin  bool
 	Name     string
 }
 
@@ -23,7 +22,6 @@ func HomeHandler(c echo.Context, service *services.User) error {
 
 	data := data{
 		Products: products,
-		IsAdmin:  false,
 		Name:     "Cool guy",
 	}
 
