@@ -39,5 +39,7 @@ func AdminCreateProduct(c echo.Context, s *services.Admin) error {
 	// 	return err
 	// }
 
-	return c.Render(http.StatusOK, "product", p)
+	c.Render(http.StatusOK, "product-created", p)
+
+	return c.Render(http.StatusOK, "product-form", nil)
 }
