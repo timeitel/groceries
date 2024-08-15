@@ -14,11 +14,11 @@
         </nav>
         <main class="p-5">
             <div class="px-4 pt-2 pb-4 mb-6 w-min bg-gray-100 rounded border border-white shadow-sm">
-                <h1 class="mb-2 text-2xl font-semibold">Add products</h1>
+                <h1 class="mb-2 text-2xl font-semibold">Add product</h1>
                 <form class="flex flex-col items-start mb-0"
                       hx-post="/admin/products"
                       hx-target="#products"
-                      hx-swap="beforebegin">
+                      hx-swap="afterbegin">
                     <label>Name</label>
                     <input type="text" name="name" class="mb-2" required />
                     <label>Description</label>
@@ -27,13 +27,9 @@
                 </form>
             </div>
             <hr class="-mx-5 mb-6 border border-black" />
-            <div id="products">
-                <h1 class="mb-2 text-2xl font-semibold">Products</h1>
-                <div class="flex gap-4">
-                    {{ block "products" .Products }}
-                    {{ end }}
-                </div>
-            </div>
+            <h1 class="mb-2 text-2xl font-semibold">Products</h1>
+            {{ block "products" .Products }}
+            {{ end }}
         </main>
     </body>
 </html>
