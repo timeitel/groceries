@@ -20,7 +20,7 @@ func (t *Templates) Render(w io.Writer, name string, data interface{}, c echo.Co
 }
 
 func NewTemplates() *Templates {
-	files, err := getHtmlFiles("internal/views")
+	files, err := getHtmlFiles("internal/web/templates")
 	if err != nil {
 		log.Fatal(err)
 	}

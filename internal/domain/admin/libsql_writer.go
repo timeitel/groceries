@@ -2,7 +2,7 @@ package admin
 
 import (
 	"context"
-	"fmt"
+	"log"
 
 	"github.com/timeitel/groceries/internal/infrastructure/data/db"
 	"github.com/timeitel/groceries/internal/types"
@@ -16,7 +16,7 @@ func (r *libSqlRepository) CreateProduct(name, description string) (*db.Product,
 
 	p, err := r.db.CreateProduct(context.Background(), params)
 	if err != nil {
-		fmt.Println("creating product", err)
+		log.Fatalf("creating product: %v", err.Error())
 		return nil, err
 	}
 

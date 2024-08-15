@@ -20,7 +20,7 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.Static("/static", "static")
+	e.Static("/static", "internal/web/static")
 
 	e.GET("/", func(c echo.Context) error {
 		return handlers.ShopperHome(c, &shopperService)

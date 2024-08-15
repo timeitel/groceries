@@ -13,23 +13,26 @@
             Admin
         </nav>
         <main class="p-5">
-            <div class="px-4 pt-2 pb-4 mb-6 w-min rounded border border-white">
+            <div class="px-4 pt-2 pb-4 mb-6 w-min bg-gray-100 rounded border border-white shadow-sm">
                 <h1 class="mb-2 text-2xl font-semibold">Add products</h1>
                 <form class="flex flex-col items-start mb-0"
                       hx-post="/admin/products"
-                      hx-target="#products">
+                      hx-target="#products"
+                      hx-swap="beforebegin">
                     <label>Name</label>
                     <input type="text" name="name" class="mb-2" required />
                     <label>Description</label>
-                    <input type="text" name="description" class="mb-4" required />
+                    <textarea type="text" name="description" class="mb-4" required></textarea>
                     <button class="p-2 text-white bg-blue-900 rounded">Submit</button>
                 </form>
             </div>
             <hr class="-mx-5 mb-6 border border-black" />
             <div id="products">
                 <h1 class="mb-2 text-2xl font-semibold">Products</h1>
-                {{ block "products" .Products }}
-                {{ end }}
+                <div class="flex gap-4">
+                    {{ block "products" .Products }}
+                    {{ end }}
+                </div>
             </div>
         </main>
     </body>

@@ -9,7 +9,7 @@ RUN apt update && apt install sqlite3
 COPY . .
 RUN mkdir /data
 RUN sqlite3 /data/groceries.db < ./internal/infrastructure/data/schema.sql
-RUN tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify
+RUN tailwindcss -i ./internal/web/static/css/input.css -o ./internal/web/static/css/output.css --minify
 CMD ["air"]
 
 FROM golang:alpine AS builder

@@ -21,19 +21,23 @@ func AdminGetHome(c echo.Context, s *services.Admin) error {
 	return c.Render(http.StatusOK, "admin", params)
 }
 
-type createProductParams struct {
-	Name        string
-	Description string
-}
-
 func AdminCreateProduct(c echo.Context, s *services.Admin) error {
 	name := c.FormValue("name")
 	description := c.FormValue("description")
 
-	params := createProductParams{
-		Name:        name,
-		Description: description,
-	}
+	p, _ := s.CreateProduct(name, description)
+	// if err != nil {
+	// 	if libsqlErr, ok := err.(*libsql.Option.Error()); ok { // Assuming libsql.Error is the custom error type
+	// 		fmt.Printf("LibSQL error code: %d\n", libsqlErr.Code)
+	// 		fmt.Printf("LibSQL error message: %s\n", libsqlErr.Message)
+	// 	} else {
+	// 		log.Fatalf("Scan failed: %v", err)
+	// 	}
+	//
+	// 	fmt.Println("error: ", err.Error())
+	//
+	// 	return err
+	// }
 
-	return c.Render(http.StatusOK, "created-product", params)
+	return c.Render(http.StatusOK, "product", p)
 }
