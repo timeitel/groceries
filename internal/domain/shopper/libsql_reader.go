@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/timeitel/groceries/internal/common/types"
+	"github.com/timeitel/groceries/internal/types"
 )
 
 func (r *libSqlRepository) GetShopper() (shopper, error) {

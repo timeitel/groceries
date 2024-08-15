@@ -3,37 +3,40 @@ package main
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/timeitel/groceries/internal/domain/auth"
+	"github.com/timeitel/groceries/internal/api"
+	"github.com/timeitel/groceries/internal/api/handlers"
+	"github.com/timeitel/groceries/internal/domain/admin"
 	"github.com/timeitel/groceries/internal/domain/shopper"
 	"github.com/timeitel/groceries/internal/services"
-	"github.com/timeitel/groceries/internal/views"
-	"github.com/timeitel/groceries/internal/views/admin"
-	"github.com/timeitel/groceries/internal/views/home"
 )
 
 func main() {
 	shopperRepo := shopper.NewLibSqlRepository()
-	service := services.NewUser(shopperRepo)
+	shopperService := services.NewUser(shopperRepo)
+	adminService := services.NewAdmin(admin.NewLibSqlRepository(), shopperRepo)
 
 	e := echo.New()
-	e.Renderer = views.NewTemplate("internal/views/**/*.html")
+	e.Renderer = api.NewTemplates()
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
 	e.Static("/static", "static")
 
 	e.GET("/", func(c echo.Context) error {
-		return home.HomeHandler(c, &service)
+		return handlers.ShopperHome(c, &shopperService)
 	})
 
 	e.POST("/products/:id", func(c echo.Context) error {
-		return home.AddProductToCartHandler(c, &service)
+		return handlers.ShopperAddProduct(c, &shopperService)
 	})
 
 	protected := e.Group("/admin")
-	protected.Use(auth.Middleware)
+	protected.Use(api.Middleware)
 	protected.GET("", func(c echo.Context) error {
-		return admin.Handler(c)
+		return handlers.AdminGetHome(c, &adminService)
+	})
+	protected.POST("/products", func(c echo.Context) error {
+		return handlers.AdminCreateProduct(c, &adminService)
 	})
 
 	e.Logger.Fatal(e.Start(":8080"))

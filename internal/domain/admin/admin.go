@@ -1,9 +1,11 @@
 package admin
 
-import "github.com/timeitel/groceries/internal/common/models"
+import (
+	"github.com/timeitel/groceries/internal/infrastructure/data/db"
+)
 
 type Admin struct {
-	User     models.User // root
-	shoppers int
+	User db.User // root
+	// shoppers int
 	// shopper metrics, activity
 }

@@ -1,22 +1,19 @@
-package shopper
+package admin
 
 import (
 	"github.com/timeitel/groceries/internal/infrastructure/data"
 	"github.com/timeitel/groceries/internal/infrastructure/data/db"
-	"github.com/timeitel/groceries/internal/types"
 )
 
 type libSqlRepository struct {
 	db *db.Queries
 }
 
-type RepoReadWriter interface {
-	GetProducts() (types.Products, error)
-	GetShopper() (shopper, error)
-	AddProductToCart(productId, quantity int) error
+type RepoWriter interface {
+	CreateProduct(name, description string) (*db.Product, error)
 }
 
-func NewLibSqlRepository() RepoReadWriter {
+func NewLibSqlRepository() RepoWriter {
 	conn := data.NewLibSqlDB()
 
 	return &libSqlRepository{

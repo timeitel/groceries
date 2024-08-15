@@ -3,8 +3,8 @@ package services
 import (
 	"fmt"
 
-	"github.com/timeitel/groceries/internal/common/types"
 	"github.com/timeitel/groceries/internal/domain/shopper"
+	"github.com/timeitel/groceries/internal/types"
 	_ "github.com/tursodatabase/go-libsql"
 )
 
