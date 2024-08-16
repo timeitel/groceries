@@ -30,16 +30,16 @@ func (r *libSqlRepository) DeleteProduct(id int64) error {
 	return nil
 }
 
-func (r *libSqlRepository) UpdateProduct(id int64, name, description string) error {
+func (r *libSqlRepository) UpdateProduct(id int64, name, description string) (*db.Product, error) {
 	params := db.UpdateProductParams{
 		Name:        name,
 		Description: types.NewSqlNullString(description),
 	}
 
-	err := r.db.UpdateProduct(context.Background(), params)
+	p, err := r.db.UpdateProduct(context.Background(), params)
 	if err != nil {
-		return types.NewSQLError("Admin creating product", err)
+		return nil, types.NewSQLError("Admin updating product", err)
 	}
 
-	return nil
+	return &p, nil
 }

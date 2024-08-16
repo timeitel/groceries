@@ -1,6 +1,7 @@
 package views
 
 import (
+	"fmt"
 	"github.com/timeitel/groceries/internal/infrastructure/data/db"
 	"github.com/timeitel/groceries/internal/web/views/components"
 )
@@ -14,12 +15,24 @@ templ AdminProductPage(p db.Product) {
 templ contents(p db.Product) {
 	<div class="px-4 pt-2 pb-4 mb-6 w-min bg-gray-100 rounded border border-white shadow-sm">
 		<h1 class="mb-2 text-2xl font-semibold">Edit product</h1>
-		<form class="flex flex-col items-start mb-0" hx-post="/admin/products" hx-swap="outerHTML">
-			<label class="bg-red-950">Name</label>
-			<input type="text" value={ p.Name } name="name" class="mb-3 p-1" required/>
+		<form class="flex flex-col items-start mb-0" hx-put={ fmt.Sprintf("/admin/products/%d", p.ID) } hx-swap="outerHTML">
+			<label>Name</label>
+			<input type="text" value={ p.Name } name="name" class="border rounded border-gray-200 mb-3 p-1 w-full" required/>
 			<label>Description</label>
-			<textarea type="text" name="description" class="mb-4 p-1" required>{ p.Description.String }</textarea>
+			<textarea type="text" name="description" class="border border-gray-200 rounded mb-4 p-1" required>
+				{ p.Description.String }
+			</textarea>
 			<button class="p-2 text-white bg-blue-900 rounded">Edit</button>
 		</form>
+	</div>
+}
+
+templ UpdatedProduct(p db.Product) {
+	<h1>Updated product:</h1>
+	<div class="w-48 bg-gray-100 rounded border border-white shadow-sm">
+		<div class="py-2 px-4 border-b border-white">
+			<strong>{ p.Name }</strong>
+		</div>
+		<div class="py-2 px-4">{ p.Description.String }</div>
 	</div>
 }

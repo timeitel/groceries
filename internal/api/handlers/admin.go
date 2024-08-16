@@ -87,10 +87,10 @@ func AdminUpdateProduct(c echo.Context, s *services.Admin) error {
 	name := c.FormValue("name")
 	description := c.FormValue("description")
 
-	err = s.UpdateProduct(*id, name, description)
+	p, err := s.UpdateProduct(*id, name, description)
 	if err != nil {
 		return c.Render(http.StatusInternalServerError, "index", nil)
 	}
 
-	return c.Render(http.StatusOK, "index", nil)
+	return render(c, views.UpdatedProduct(*p))
 }

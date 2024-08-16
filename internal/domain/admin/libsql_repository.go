@@ -12,7 +12,7 @@ type libSqlRepository struct {
 type RepoWriter interface {
 	CreateProduct(name, description string) (*db.Product, error)
 	DeleteProduct(id int64) error
-	UpdateProduct(id int64, name, description string) error
+	UpdateProduct(id int64, name, description string) (*db.Product, error)
 }
 
 func NewLibSqlRepository() RepoWriter {

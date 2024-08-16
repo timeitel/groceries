@@ -47,13 +47,13 @@ func (s *Admin) GetProducts() (types.Products, error) {
 	return p, nil
 }
 
-func (s *Admin) UpdateProduct(id int64, name string, description string) error {
-	err := s.adminRepo.UpdateProduct(id, name, description)
+func (s *Admin) UpdateProduct(id int64, name string, description string) (*db.Product, error) {
+	p, err := s.adminRepo.UpdateProduct(id, name, description)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	return p, nil
 }
 
 func (s *Admin) DeleteProduct(id int64) error {

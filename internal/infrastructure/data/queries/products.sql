@@ -22,12 +22,14 @@ FROM
 DELETE FROM products
 WHERE id = ?;
 
--- name: UpdateProduct :exec
+-- name: UpdateProduct :one
 UPDATE
     products
 SET
     name = ?,
     description = ?
 WHERE
-    id = ?;
+    id = ?
+RETURNING
+    *;
 

@@ -18,8 +18,12 @@ func NewSQLError(context string, err error) error {
 
 	isUniqueErr := strings.Contains(err.Error(), errMsgSQLUnique)
 	if isUniqueErr {
-		return fmt.Errorf("Context error: %s\nSQL error: %w\n%w\n", context, ErrSQLUnique, wrappedErr)
+		newErr := fmt.Errorf("Context error: %s\nSQL error: %w\n%w\n", context, ErrSQLUnique, wrappedErr)
+		fmt.Println(newErr)
+		return newErr
 	}
 
-	return fmt.Errorf("Context error: %s\n%w\n", context, wrappedErr)
+	newErr := fmt.Errorf("Context error: %s\n%w\n", context, wrappedErr)
+	fmt.Println(newErr)
+	return newErr
 }
