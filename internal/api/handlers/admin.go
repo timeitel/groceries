@@ -75,7 +75,7 @@ func AdminDeleteProduct(c echo.Context, s *services.Admin) error {
 		return c.Render(http.StatusInternalServerError, "index", nil)
 	}
 
-	return c.Render(http.StatusOK, "index", nil)
+	return render(c, views.DeletedProduct())
 }
 
 func AdminUpdateProduct(c echo.Context, s *services.Admin) error {
