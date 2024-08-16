@@ -1,0 +1,17 @@
+package views
+
+import "github.com/timeitel/groceries/internal/web/views/components"
+
+templ AdminProductPage() {
+	@components.Layout() {
+		@contents()
+	}
+}
+
+templ contents() {
+	<div>
+		<h1>Welcome home!</h1>
+		<div>test</div>
+		<div class="bg-red-200">and again?</div>
+	</div>
+}
