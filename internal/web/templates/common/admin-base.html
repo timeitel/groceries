@@ -1,0 +1,41 @@
+{{ define "admin-base" }}
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://unpkg.com/htmx.org@1.9.11"></script>
+        <link rel="stylesheet" href="/static/css/output.css" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon.ico">
+        <title>groceries!</title>
+    </head>
+    <body class="h-full bg-green-200">
+        <nav class="p-5 bg-white">
+            Admin
+        </nav>
+        <div class="p-5">
+            {{ block "children" .Children }}
+            {{ if . }}
+            {{ block "admin-product-test" . }}
+            {{ end }}
+            {{ end }}
+            {{ end }}
+        </div>
+    </body>
+</html>
+{{ end }}
+{{ define "admin-product-test" }}
+<form class="flex flex-col items-start mb-0"
+      hx-post="/admin/products"
+      hx-swap="outerHTML">
+    <label>Name</label>
+    <input type="text" name="name" value="{{ .Name }}" class="mb-3" required />
+    <label>Description</label>
+    <textarea type="text" name="description" class="mb-4" required>{{ .Description }}</textarea>
+    <button class="p-2 text-white bg-blue-900 rounded">Submit</button>
+    {{ block "error" . }}
+    {{ if .Error }}
+    <p class="text-red-500">{{ .Error }}</p>
+    {{ end }}
+    {{ end }}
+</form>
+{{ end }}
