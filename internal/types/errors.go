@@ -7,7 +7,8 @@ import (
 )
 
 var (
-	ErrSQLUnique = errors.New("UNIQUE constraint failed")
+	ErrSQLUnique   = errors.New("UNIQUE constraint failed")
+	ErrSQLNotFound = errors.New("Not found")
 )
 
 var errMsgSQLUnique = "error code = 1: Error fetching next row: SQLite failure: `UNIQUE constraint failed:"
