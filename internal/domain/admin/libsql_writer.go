@@ -32,6 +32,7 @@ func (r *libSqlRepository) DeleteProduct(id int64) error {
 
 func (r *libSqlRepository) UpdateProduct(id int64, name, description string) (*db.Product, error) {
 	params := db.UpdateProductParams{
+		ID:          id,
 		Name:        name,
 		Description: types.NewSqlNullString(description),
 	}
