@@ -1,12 +1,17 @@
 package handlers
 
 import (
+	"errors"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
 	"github.com/timeitel/groceries/internal/services"
 	"github.com/timeitel/groceries/internal/types"
 )
+
+type formErr struct {
+	Error string
+}
 
 func AdminGetHome(c echo.Context, s *services.Admin) error {
 	p, err := s.GetProducts()
@@ -16,7 +21,8 @@ func AdminGetHome(c echo.Context, s *services.Admin) error {
 
 	params := struct {
 		Products types.Products
-	}{Products: p}
+		Error    string
+	}{Products: p, Error: ""}
 
 	return c.Render(http.StatusOK, "admin", params)
 }
@@ -24,22 +30,19 @@ func AdminGetHome(c echo.Context, s *services.Admin) error {
 func AdminCreateProduct(c echo.Context, s *services.Admin) error {
 	name := c.FormValue("name")
 	description := c.FormValue("description")
+	formErr := formErr{Error: ""}
 
-	p, _ := s.CreateProduct(name, description)
-	// if err != nil {
-	// 	if libsqlErr, ok := err.(*libsql.Option.Error()); ok { // Assuming libsql.Error is the custom error type
-	// 		fmt.Printf("LibSQL error code: %d\n", libsqlErr.Code)
-	// 		fmt.Printf("LibSQL error message: %s\n", libsqlErr.Message)
-	// 	} else {
-	// 		log.Fatalf("Scan failed: %v", err)
-	// 	}
-	//
-	// 	fmt.Println("error: ", err.Error())
-	//
-	// 	return err
-	// }
+	p, err := s.CreateProduct(name, description)
+	if err != nil {
+		if errors.Is(err, types.ErrSQLUnique) {
+			formErr.Error = "This product name already exists"
+			return c.Render(http.StatusUnprocessableEntity, "product-form", formErr)
+		}
+
+		return c.Render(http.StatusInternalServerError, "product-form", formErr)
+	}
 
 	c.Render(http.StatusOK, "product-created", p)
 
-	return c.Render(http.StatusOK, "product-form", nil)
+	return c.Render(http.StatusOK, "product-form", formErr)
 }

@@ -23,17 +23,13 @@
             {{ block "products" .Products }}
             {{ end }}
         </main>
+        <script>
+          document.body.addEventListener('htmx:beforeSwap', function(evt) {
+            if(evt.detail.xhr.status === 422){
+                evt.detail.shouldSwap = true;
+                evt.detail.isError = false;
+            }})
+        </script>
     </body>
 </html>
-{{ end }}
-{{ define "product-form" }}
-<form class="flex flex-col items-start mb-0"
-      hx-post="/admin/products"
-      hx-swap="outerHTML">
-    <label>Name</label>
-    <input type="text" name="name" class="mb-2" required />
-    <label>Description</label>
-    <textarea type="text" name="description" class="mb-4" required></textarea>
-    <button class="p-2 text-white bg-blue-900 rounded">Submit</button>
-</form>
 {{ end }}
