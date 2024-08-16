@@ -11,6 +11,7 @@ type libSqlRepository struct {
 }
 
 type RepoReadWriter interface {
+	GetProduct(id int64) (*db.Product, error)
 	GetProducts() (types.Products, error)
 	GetShopper() (shopper, error)
 	AddProductToCart(productId, quantity int) error

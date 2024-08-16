@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/timeitel/groceries/internal/domain/shopper"
+	"github.com/timeitel/groceries/internal/infrastructure/data/db"
 	"github.com/timeitel/groceries/internal/types"
 	_ "github.com/tursodatabase/go-libsql"
 )
@@ -38,9 +39,17 @@ func (s *User) AddProductToCart(productID int, quantity int) error {
 func (s *User) GetProducts() (types.Products, error) {
 	products, err := s.repo.GetProducts()
 	if err != nil {
-		fmt.Println("getting products", err)
 		return nil, err
 	}
 
 	return products, nil
+}
+
+func (s *User) GetProduct(id int64) (*db.Product, error) {
+	p, err := s.repo.GetProduct(id)
+	if err != nil {
+		return nil, err
+	}
+
+	return p, nil
 }

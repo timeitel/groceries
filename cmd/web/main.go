@@ -35,8 +35,14 @@ func main() {
 	protected.GET("", func(c echo.Context) error {
 		return handlers.AdminGetHome(c, &adminService)
 	})
-	protected.POST("/products", func(c echo.Context) error {
-		return handlers.AdminCreateProduct(c, &adminService)
+	protected.GET("/products/:id", func(c echo.Context) error {
+		return handlers.AdminGetProduct(c, &adminService)
+	})
+	protected.PUT("/products/:id", func(c echo.Context) error {
+		return handlers.AdminUpdateProduct(c, &adminService)
+	})
+	protected.DELETE("/products/:id", func(c echo.Context) error {
+		return handlers.AdminDeleteProduct(c, &adminService)
 	})
 
 	e.Logger.Fatal(e.Start(":8080"))

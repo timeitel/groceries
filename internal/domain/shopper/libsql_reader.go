@@ -2,9 +2,9 @@ package shopper
 
 import (
 	"context"
-	"fmt"
 	"log"
 
+	"github.com/timeitel/groceries/internal/infrastructure/data/db"
 	"github.com/timeitel/groceries/internal/types"
 )
 
@@ -22,9 +22,17 @@ func (r *libSqlRepository) GetProducts() (types.Products, error) {
 	p, err := r.db.GetProducts(context.Background())
 
 	if err != nil {
-		fmt.Println("Unable to get products", err)
 		return nil, err
 	}
 
 	return p, nil
+}
+
+func (r *libSqlRepository) GetProduct(id int64) (*db.Product, error) {
+	p, err := r.db.GetProduct(context.Background(), id)
+	if err != nil {
+		return nil, types.ErrSQLNotFound
+	}
+
+	return &p, nil
 }

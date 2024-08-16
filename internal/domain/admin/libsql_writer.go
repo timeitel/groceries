@@ -20,3 +20,26 @@ func (r *libSqlRepository) CreateProduct(name, description string) (*db.Product,
 
 	return &p, nil
 }
+
+func (r *libSqlRepository) DeleteProduct(id int64) error {
+	err := r.db.DeleteProduct(context.Background(), id)
+	if err != nil {
+		return types.NewSQLError("admin deleting product", err)
+	}
+
+	return nil
+}
+
+func (r *libSqlRepository) UpdateProduct(id int64, name, description string) error {
+	params := db.UpdateProductParams{
+		Name:        name,
+		Description: types.NewSqlNullString(description),
+	}
+
+	err := r.db.UpdateProduct(context.Background(), params)
+	if err != nil {
+		return types.NewSQLError("Admin creating product", err)
+	}
+
+	return nil
+}

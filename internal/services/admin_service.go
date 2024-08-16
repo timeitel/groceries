@@ -29,6 +29,15 @@ func (s *Admin) CreateProduct(name, description string) (*db.Product, error) {
 	return p, nil
 }
 
+func (s *Admin) GetProduct(id int64) (*db.Product, error) {
+	p, err := s.shopperRepo.GetProduct(id)
+	if err != nil {
+		return nil, err
+	}
+
+	return p, nil
+}
+
 func (s *Admin) GetProducts() (types.Products, error) {
 	p, err := s.shopperRepo.GetProducts()
 	if err != nil {
@@ -36,4 +45,22 @@ func (s *Admin) GetProducts() (types.Products, error) {
 	}
 
 	return p, nil
+}
+
+func (s *Admin) UpdateProduct(id int64, name string, description string) error {
+	err := s.adminRepo.UpdateProduct(id, name, description)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *Admin) DeleteProduct(id int64) error {
+	err := s.adminRepo.DeleteProduct(id)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
