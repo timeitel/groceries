@@ -20,23 +20,17 @@ type formErr struct {
 }
 
 func AdminGetProduct(c echo.Context, s *services.Admin) error {
-	// id, err := getIdFromPath(c)
-	// if err != nil {
-	// 	return c.Render(http.StatusOK, "admin-product-not-found", nil)
-	// }
+	id, err := getIdFromPath(c)
+	if err != nil {
+		return c.Render(http.StatusOK, "admin-product-not-found", nil)
+	}
 
-	// p, err := s.GetProduct(*id)
-	// if err != nil {
-	// 	return c.Render(http.StatusOK, "admin-product-not-found", nil)
-	// }
-	//
-	// data := struct {
-	// 	Children db.Product
-	// }{
-	// 	Children: *p,
-	// }
-	//
-	return render(c, views.AdminProductPage())
+	p, err := s.GetProduct(*id)
+	if err != nil {
+		return c.Render(http.StatusOK, "admin-product-not-found", nil)
+	}
+
+	return render(c, views.AdminProductPage(*p))
 }
 
 func AdminGetHome(c echo.Context, s *services.Admin) error {
