@@ -22,7 +22,7 @@ services:
         - action: sync
           path: ./internal
           target: /app/internal
-        - action: sync
+        - action: sync+restart
           path: ./.air.toml
           target: /app/.air.toml
         - action: rebuild
