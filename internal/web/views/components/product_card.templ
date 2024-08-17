@@ -17,12 +17,14 @@ templ ProductCard(p db.Product) {
 }
 
 templ CreatedProductCard(p db.Product) {
-	<a href={ templ.URL(fmt.Sprintf("/admin/products/%d", p.ID)) } hx-swap-oob="afterbegin" id="products">
-		<div class="w-48 bg-gray-100 rounded border border-white shadow-sm">
-			<div class="py-2 px-4 border-b border-white">
-				<strong>{ p.Name }</strong>
+	<div hx-swap-oob="afterbegin" id="products">
+		<a href={ templ.URL(fmt.Sprintf("/admin/products/%d", p.ID)) }>
+			<div class="w-48 bg-gray-100 rounded border border-white shadow-sm">
+				<div class="py-2 px-4 border-b border-white">
+					<strong>{ p.Name }</strong>
+				</div>
+				<div class="py-2 px-4">{ p.Description.String }</div>
 			</div>
-			<div class="py-2 px-4">{ p.Description.String }</div>
-		</div>
-	</a>
+		</a>
+	</div>
 }
