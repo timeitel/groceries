@@ -8,6 +8,7 @@ import (
 	"github.com/timeitel/groceries/internal/services"
 	"github.com/timeitel/groceries/internal/types"
 	"github.com/timeitel/groceries/internal/web/views"
+	"github.com/timeitel/groceries/internal/web/views/components"
 )
 
 type adminPageData struct {
@@ -51,16 +52,15 @@ func AdminCreateProduct(c echo.Context, s *services.Admin) error {
 	if err != nil {
 		if errors.Is(err, types.ErrSQLUnique) {
 			formErr.Error = "This product name already exists"
-			return c.Render(http.StatusUnprocessableEntity, "product-form", formErr)
+			return render(c, components.AddProductForm())
 		}
 
-		return c.Render(http.StatusInternalServerError, "product-form", formErr)
+		return render(c, components.AddProductForm())
 	}
 
-	c.Render(http.StatusOK, "product-created", p)
+	render(c, components.CreatedProductCard(*p))
 
-	return c.Render(http.StatusOK, "product-form", formErr)
-	// return render(c, components.ProductCard(p))
+	return render(c, components.AddProductForm())
 }
 
 func AdminDeleteProduct(c echo.Context, s *services.Admin) error {

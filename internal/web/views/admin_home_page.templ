@@ -9,10 +9,10 @@ templ AdminHomePage(products types.Products) {
 	@components.Layout() {
 		@components.AddProductForm()
 		<hr class="-mx-5 mb-6 border border-black"/>
-		for _, p := range products {
-			<div id="products" class="flex flex-wrap gap-4">
+		<div id="products" class="flex flex-wrap gap-4">
+			for _, p := range products {
 				@components.ProductCard(p)
-			</div>
-		}
+			}
+		</div>
 	}
 }
