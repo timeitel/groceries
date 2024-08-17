@@ -16,7 +16,6 @@ func main() {
 	adminService := services.NewAdmin(admin.NewLibSqlRepository(), shopperRepo)
 
 	e := echo.New()
-	e.Renderer = api.NewTemplates()
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
