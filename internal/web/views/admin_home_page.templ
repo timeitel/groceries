@@ -3,10 +3,11 @@ package views
 import (
 	"github.com/timeitel/groceries/internal/types"
 	"github.com/timeitel/groceries/internal/web/views/components"
+	"github.com/timeitel/groceries/internal/web/views/pages"
 )
 
 templ AdminHomePage(products types.Products) {
-	@components.Layout() {
+	@pages.Admin() {
 		@components.AddProductForm()
 		<hr class="-mx-5 mb-6 border border-black"/>
 		<div id="products" class="flex flex-wrap gap-4">
