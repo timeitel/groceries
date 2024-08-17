@@ -38,6 +38,9 @@ func main() {
 	protected.GET("/products/:id", func(c echo.Context) error {
 		return handlers.AdminGetProduct(c, &adminService)
 	})
+	protected.POST("/products", func(c echo.Context) error {
+		return handlers.AdminCreateProduct(c, &adminService)
+	})
 	protected.PUT("/products/:id", func(c echo.Context) error {
 		return handlers.AdminUpdateProduct(c, &adminService)
 	})
