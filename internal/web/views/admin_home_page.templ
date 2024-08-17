@@ -1,0 +1,18 @@
+package views
+
+import (
+	"github.com/timeitel/groceries/internal/types"
+	"github.com/timeitel/groceries/internal/web/views/components"
+)
+
+templ AdminHomePage(products types.Products) {
+	@components.Layout() {
+		@components.AddProductForm()
+		<hr class="-mx-5 mb-6 border border-black"/>
+		for _, p := range products {
+			<div id="products" class="flex flex-wrap gap-4">
+				@components.ProductCard(p)
+			</div>
+		}
+	}
+}

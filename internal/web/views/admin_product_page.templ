@@ -15,7 +15,11 @@ templ AdminProductPage(p db.Product) {
 templ contents(p db.Product) {
 	<div class="px-4 pt-2 pb-4 mb-6 w-min bg-gray-100 rounded border border-white shadow-sm">
 		<h1 class="mb-2 text-2xl font-semibold">Edit product</h1>
-		<form class="flex flex-col items-start mb-4" hx-put={ fmt.Sprintf("/admin/products/%d", p.ID) } hx-swap="outerHTML">
+		<form
+			class="flex flex-col items-start mb-4"
+			hx-put={ newURL(fmt.Sprintf("/admin/products/%d", p.ID)) }
+			hx-swap="outerHTML"
+		>
 			<label>Name</label>
 			<input type="text" value={ p.Name } name="name" class="border rounded border-gray-200 mb-3 p-1 w-full" required/>
 			<label>Description</label>
@@ -43,8 +47,4 @@ templ UpdatedProduct(p db.Product) {
 		</div>
 		<div class="py-2 px-4">{ p.Description.String }</div>
 	</div>
-}
-
-templ DeletedProduct() {
-	<h1>Deleted product!</h1>
 }

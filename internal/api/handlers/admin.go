@@ -39,9 +39,7 @@ func AdminGetHome(c echo.Context, s *services.Admin) error {
 		return err
 	}
 
-	data := adminPageData{Products: p, Error: ""}
-
-	return c.Render(http.StatusOK, "admin", data)
+	return render(c, views.AdminHomePage(p))
 }
 
 func AdminCreateProduct(c echo.Context, s *services.Admin) error {
@@ -62,6 +60,7 @@ func AdminCreateProduct(c echo.Context, s *services.Admin) error {
 	c.Render(http.StatusOK, "product-created", p)
 
 	return c.Render(http.StatusOK, "product-form", formErr)
+	// return render(c, components.ProductCard(p))
 }
 
 func AdminDeleteProduct(c echo.Context, s *services.Admin) error {
