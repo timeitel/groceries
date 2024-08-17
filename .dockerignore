@@ -1,6 +1,5 @@
 *.md
 **.DS_Store
-**/*.templ
 .dockerignore
 Dockerfile
 compose*.yml
