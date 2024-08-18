@@ -7,8 +7,8 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/timeitel/groceries/internal/services"
 	"github.com/timeitel/groceries/internal/types"
-	"github.com/timeitel/groceries/internal/web/views"
 	"github.com/timeitel/groceries/internal/web/views/components"
+	"github.com/timeitel/groceries/internal/web/views/pages"
 )
 
 type adminPageData struct {
@@ -31,7 +31,7 @@ func AdminGetProduct(c echo.Context, s *services.Admin) error {
 		return c.Render(http.StatusOK, "admin-product-not-found", nil)
 	}
 
-	return render(c, views.AdminProductPage(*p))
+	return render(c, pages.AdminProduct(*p))
 }
 
 func AdminGetHome(c echo.Context, s *services.Admin) error {
@@ -40,7 +40,7 @@ func AdminGetHome(c echo.Context, s *services.Admin) error {
 		return err
 	}
 
-	return render(c, views.AdminHomePage(p))
+	return render(c, pages.AdminHome(p))
 }
 
 func AdminCreateProduct(c echo.Context, s *services.Admin) error {
@@ -91,5 +91,5 @@ func AdminUpdateProduct(c echo.Context, s *services.Admin) error {
 		return c.Render(http.StatusInternalServerError, "index", nil)
 	}
 
-	return render(c, views.UpdatedProduct(*p))
+	return render(c, components.UpdatedProduct(*p))
 }

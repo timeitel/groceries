@@ -1,18 +1,18 @@
-package views
+package pages
 
 import (
 	"fmt"
 	"github.com/timeitel/groceries/internal/infrastructure/data/db"
-	"github.com/timeitel/groceries/internal/web/views/components"
+	"github.com/timeitel/groceries/internal/web/views/layouts"
 )
 
-templ AdminProductPage(p db.Product) {
-	@components.Layout() {
-		@contents(p)
+templ AdminProduct(p db.Product) {
+	@layouts.Admin() {
+		@productPageContent(p)
 	}
 }
 
-templ contents(p db.Product) {
+templ productPageContent(p db.Product) {
 	<div class="px-4 pt-2 pb-4 mb-6 w-min bg-gray-100 rounded border border-white shadow-sm">
 		<h1 class="mb-2 text-2xl font-semibold">Edit product</h1>
 		<form
@@ -36,15 +36,5 @@ templ contents(p db.Product) {
 		>
 			<button class="p-2 text-white bg-red-500 rounded">Delete</button>
 		</form>
-	</div>
-}
-
-templ UpdatedProduct(p db.Product) {
-	<h1>Updated product:</h1>
-	<div class="w-48 bg-gray-100 rounded border border-white shadow-sm">
-		<div class="py-2 px-4 border-b border-white">
-			<strong>{ p.Name }</strong>
-		</div>
-		<div class="py-2 px-4">{ p.Description.String }</div>
 	</div>
 }
