@@ -19,21 +19,18 @@ func NewUser(r shopper.RepoReadWriter) User {
 	}
 }
 
-func (s *User) AddProductToCart(productID int, quantity int) error {
+func (s *User) AddProductToCart(productID int, quantity int) (*db.Product, error) {
 	user, err := s.repo.GetShopper()
+	fmt.Println(user)
 	if err != nil {
-		fmt.Println(err)
-		return err
+		return nil, err
 	}
 
 	if err = s.repo.AddProductToCart(productID, 1); err != nil {
-		fmt.Println(err)
-		return err
+		return nil, err
 	}
 
-	fmt.Println(user)
-
-	return nil
+	return nil, err
 }
 
 func (s *User) GetProducts() (types.Products, error) {

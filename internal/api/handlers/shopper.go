@@ -1,39 +1,27 @@
 package handlers
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
 	"github.com/timeitel/groceries/internal/services"
-	"github.com/timeitel/groceries/internal/types"
+	"github.com/timeitel/groceries/internal/web/views/components"
 	"github.com/timeitel/groceries/internal/web/views/pages"
 )
 
 func ShopperAddProduct(c echo.Context, service *services.User) error {
-	if err := service.AddProductToCart(1, 1); err != nil {
+	p, err := service.AddProductToCart(1, 1)
+	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)
 	}
 
-	// items, err := service.GetHomeData()
-	// if err != nil {
-	// 	fmt.Println("Getting cart items", err)
-	// 	return echo.NewHTTPError(http.StatusInternalServerError)
-	// }
-	//
-
-	return c.Render(http.StatusOK, "added", nil)
+	return render(c, components.ProductCard(*p))
 }
 
-type data struct {
-	Products types.Products
-	Name     string
-}
-
-func ShopperHome(c echo.Context, service *services.User) error {
+func ShopperGetHome(c echo.Context, service *services.User) error {
 	products, err := service.GetProducts()
 	if err != nil {
-		log.Fatalln("getting products")
+		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 
 	vm := pages.ShopperHomeViewModel{
@@ -42,4 +30,18 @@ func ShopperHome(c echo.Context, service *services.User) error {
 	}
 
 	return render(c, pages.ShopperHome(vm))
+}
+
+func ShopperGetProduct(c echo.Context, s *services.User) error {
+	id, err := getIdFromPath(c)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest)
+	}
+
+	p, err := s.GetProduct(*id)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusNotFound)
+	}
+
+	return render(c, pages.ShopperProduct(*p))
 }

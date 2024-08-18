@@ -12,7 +12,7 @@ CREATE TABLE users (
     FOREIGN KEY (active_cart_id) REFERENCES carts (id)
 );
 
-CREATE TABLE cart_items (
+CREATE TABLE cart_products (
     product_id integer,
     cart_id integer,
     quantity integer DEFAULT 1,

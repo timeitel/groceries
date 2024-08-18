@@ -22,7 +22,10 @@ func main() {
 	e.Static("/static", "internal/web/static")
 
 	e.GET("/", func(c echo.Context) error {
-		return handlers.ShopperHome(c, &shopperService)
+		return handlers.ShopperGetHome(c, &shopperService)
+	})
+	e.GET("/products/:id", func(c echo.Context) error {
+		return handlers.ShopperGetProduct(c, &shopperService)
 	})
 
 	e.POST("/products/:id", func(c echo.Context) error {

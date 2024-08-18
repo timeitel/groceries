@@ -23,12 +23,12 @@ type formErr struct {
 func AdminGetProduct(c echo.Context, s *services.Admin) error {
 	id, err := getIdFromPath(c)
 	if err != nil {
-		return c.Render(http.StatusOK, "admin-product-not-found", nil)
+		return echo.NewHTTPError(http.StatusBadRequest)
 	}
 
 	p, err := s.GetProduct(*id)
 	if err != nil {
-		return c.Render(http.StatusOK, "admin-product-not-found", nil)
+		return echo.NewHTTPError(http.StatusNotFound)
 	}
 
 	return render(c, pages.AdminProduct(*p))
@@ -66,12 +66,12 @@ func AdminCreateProduct(c echo.Context, s *services.Admin) error {
 func AdminDeleteProduct(c echo.Context, s *services.Admin) error {
 	id, err := getIdFromPath(c)
 	if err != nil {
-		return c.Render(http.StatusBadRequest, "index", nil)
+		return echo.NewHTTPError(http.StatusBadRequest)
 	}
 
 	err = s.DeleteProduct(*id)
 	if err != nil {
-		return c.Render(http.StatusInternalServerError, "index", nil)
+		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 
 	return c.Redirect(http.StatusSeeOther, "/admin")
@@ -80,7 +80,7 @@ func AdminDeleteProduct(c echo.Context, s *services.Admin) error {
 func AdminUpdateProduct(c echo.Context, s *services.Admin) error {
 	id, err := getIdFromPath(c)
 	if err != nil {
-		return c.Render(http.StatusBadRequest, "index", nil)
+		return echo.NewHTTPError(http.StatusBadRequest)
 	}
 
 	name := c.FormValue("name")
@@ -88,7 +88,7 @@ func AdminUpdateProduct(c echo.Context, s *services.Admin) error {
 
 	p, err := s.UpdateProduct(*id, name, description)
 	if err != nil {
-		return c.Render(http.StatusInternalServerError, "index", nil)
+		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 
 	return render(c, components.UpdatedProduct(*p))
