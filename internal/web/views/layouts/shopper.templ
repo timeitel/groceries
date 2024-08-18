@@ -1,6 +1,6 @@
 package layouts
 
-templ Shopper() {
+templ Shopper(name string) {
 	<html>
 		<head>
 			<meta charset="UTF-8"/>
@@ -13,11 +13,7 @@ templ Shopper() {
 		</head>
 		<body class="h-full bg-green-200">
 			<nav class="p-5 bg-white">
-				<a href="/">
-					<strong>
-						Hey there, here's your shopping list
-					</strong>
-				</a>
+				Hey { name }, here's your shopping list
 			</nav>
 			<main class="p-5">
 				{ children... }

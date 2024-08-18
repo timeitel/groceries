@@ -7,6 +7,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/timeitel/groceries/internal/services"
 	"github.com/timeitel/groceries/internal/types"
+	"github.com/timeitel/groceries/internal/web/views/pages"
 )
 
 func ShopperAddProduct(c echo.Context, service *services.User) error {
@@ -35,10 +36,10 @@ func ShopperHome(c echo.Context, service *services.User) error {
 		log.Fatalln("getting products")
 	}
 
-	data := data{
+	vm := pages.ShopperHomeViewModel{
 		Products: products,
 		Name:     "Cool guy",
 	}
 
-	return c.Render(http.StatusOK, "index", data)
+	return render(c, pages.ShopperHome(vm))
 }

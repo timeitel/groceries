@@ -1,0 +1,22 @@
+package pages
+
+import (
+	"github.com/timeitel/groceries/internal/types"
+	c "github.com/timeitel/groceries/internal/web/views/components"
+	"github.com/timeitel/groceries/internal/web/views/layouts"
+)
+
+type ShopperHomeViewModel struct {
+	Products types.Products
+	Name     string
+}
+
+templ ShopperHome(vm ShopperHomeViewModel) {
+	@layouts.Shopper(vm.Name) {
+		<div id="products" class="flex flex-wrap gap-4">
+			for _, p := range vm.Products {
+				@c.ProductCard(p)
+			}
+		</div>
+	}
+}
