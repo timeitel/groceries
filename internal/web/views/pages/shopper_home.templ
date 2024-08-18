@@ -13,7 +13,7 @@ type ShopperHomeViewModel struct {
 }
 
 templ ShopperHome(vm ShopperHomeViewModel) {
-	@layouts.Shopper(vm.Name) {
+	@layouts.Shopper(shopperHomeHeading(vm.Name)) {
 		<div id="products" class="flex flex-wrap gap-4">
 			for _, p := range vm.Products {
 				<a href={ templ.URL(fmt.Sprintf("/products/%d", p.ID)) }>
@@ -22,4 +22,8 @@ templ ShopperHome(vm ShopperHomeViewModel) {
 			}
 		</div>
 	}
+}
+
+templ shopperHomeHeading(name string) {
+	Hey { name }, here's your shopping list
 }

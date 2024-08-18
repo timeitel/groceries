@@ -1,6 +1,6 @@
 package layouts
 
-templ Shopper(name string) {
+templ Shopper(heading templ.Component) {
 	<html>
 		<head>
 			<meta charset="UTF-8"/>
@@ -13,7 +13,7 @@ templ Shopper(name string) {
 		</head>
 		<body class="h-full bg-green-200">
 			<nav class="p-5 bg-white">
-				Hey { name }, here's your shopping list
+				@heading
 			</nav>
 			<main class="p-5">
 				{ children... }

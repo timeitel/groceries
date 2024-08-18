@@ -7,14 +7,18 @@ import (
 )
 
 templ ShopperProduct(p db.Product) {
-	@layouts.Shopper("cool guy") {
+	@layouts.Shopper(shopperProductHeading()) {
 		@shopperProductContent(p)
 	}
 }
 
 templ shopperProductContent(p db.Product) {
-	<div class="px-4 pt-2 pb-4 mb-6 w-min bg-gray-100 rounded border border-white shadow-sm">
-		<h1 class="mb-2 text-2xl font-semibold">Product</h1>
-		@components.ProductCard(p)
-	</div>
+	<h1 class="mb-2 text-2xl font-semibold">Product</h1>
+	@components.ProductCard(p)
+}
+
+templ shopperProductHeading() {
+	<a href="/">
+		{ "< Home" }
+	</a>
 }
