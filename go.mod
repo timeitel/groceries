@@ -11,6 +11,7 @@ require (
 require (
 	github.com/antlr4-go/antlr/v4 v4.13.0 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
+	github.com/google/uuid v1.6.0 // indirect
 	github.com/labstack/gommon v0.4.2 // indirect
 	github.com/libsql/sqlite-antlr4-parser v0.0.0-20240327125255-dbf53b6cbf06 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
