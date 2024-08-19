@@ -5,8 +5,8 @@ import (
 )
 
 type RepoWriter interface {
-	Get() (*cart, error)
-	AddItem(itemId, cartId uuid.UUID, quantity int) (*Item, error)
-	RemoveItem(cartId, itemId uuid.UUID) error
+	GetItems(cartID uuid.UUID) (*Items, error)
+	AddItem(cartID, itemID uuid.UUID, quantity int) (*Item, error)
+	RemoveItem(cartID, itemID uuid.UUID) error
 	UpdateItemQuantity(quantity int) (*int, error)
 }

@@ -27,16 +27,16 @@ func AdminGetProduct(c echo.Context, s *services.Admin) error {
 		return echo.NewHTTPError(http.StatusBadRequest)
 	}
 
-	p, err := s.GetProduct(*id)
+	p, err := s.GetItem(*id)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusNotFound)
 	}
 
-	return render(c, pages.AdminProduct(*p))
+	return render(c, pages.AdminItem(*p))
 }
 
 func AdminGetHome(c echo.Context, s *services.Admin) error {
-	p, err := s.GetProducts()
+	p, err := s.GetItems()
 	if err != nil {
 		return err
 	}
@@ -49,7 +49,7 @@ func AdminCreateProduct(c echo.Context, s *services.Admin) error {
 	description := c.FormValue("description")
 	formErr := formErr{Error: ""}
 
-	p, err := s.CreateProduct(name, description)
+	p, err := s.CreateItem(name, description)
 	if err != nil {
 		if errors.Is(err, domain.ErrSQLUnique) {
 			formErr.Error = "This product name already exists"
@@ -70,7 +70,7 @@ func AdminDeleteProduct(c echo.Context, s *services.Admin) error {
 		return echo.NewHTTPError(http.StatusBadRequest)
 	}
 
-	err = s.DeleteProduct(*id)
+	err = s.DeleteItem(*id)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
@@ -87,10 +87,10 @@ func AdminUpdateProduct(c echo.Context, s *services.Admin) error {
 	name := c.FormValue("name")
 	description := c.FormValue("description")
 
-	p, err := s.UpdateProduct(*id, name, description)
+	p, err := s.UpdateItem(*id, name, description)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 
-	return render(c, components.UpdatedProduct(*p))
+	return render(c, components.UpdatedItem(*p))
 }

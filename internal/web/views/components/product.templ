@@ -3,16 +3,15 @@ package components
 import (
 	"fmt"
 	"github.com/timeitel/groceries/internal/domain/item"
-	"github.com/timeitel/groceries/internal/infrastructure/data/db"
 )
 
-templ UpdatedProduct(p db.Product) {
+templ UpdatedItem(i item.Item) {
 	<h1>Updated product:</h1>
 	<div class="w-48 bg-gray-100 rounded border border-white shadow-sm">
 		<div class="py-2 px-4 border-b border-white">
-			<strong>{ p.Name }</strong>
+			<strong>{ i.Name }</strong>
 		</div>
-		<div class="py-2 px-4">{ p.Description.String }</div>
+		<div class="py-2 px-4">{ i.Description }</div>
 	</div>
 }
 
@@ -25,14 +24,14 @@ templ ProductCard(p item.Item) {
 	</div>
 }
 
-templ CreatedProductCard(p db.Product) {
+templ CreatedProductCard(i item.Item) {
 	<div hx-swap-oob="afterbegin" id="products">
-		<a href={ templ.URL(fmt.Sprintf("/admin/products/%d", p.ID)) }>
+		<a href={ templ.URL(fmt.Sprintf("/admin/products/%d", i.ID)) }>
 			<div class="w-48 bg-gray-100 rounded border border-white shadow-sm">
 				<div class="py-2 px-4 border-b border-white">
-					<strong>{ p.Name }</strong>
+					<strong>{ i.Name }</strong>
 				</div>
-				<div class="py-2 px-4">{ p.Description.String }</div>
+				<div class="py-2 px-4">{ i.Description }</div>
 			</div>
 		</a>
 	</div>

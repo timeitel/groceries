@@ -17,7 +17,7 @@ type Item struct {
 	Quantity int
 }
 
-func newCartItem(ci db.CartItem) Item {
+func newItem(ci db.CartItem) Item {
 	return Item{
 		Name:     "asd",
 		Quantity: int(ci.Quantity.Int64),

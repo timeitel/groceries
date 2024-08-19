@@ -1,15 +1,18 @@
 package user
 
-import "github.com/timeitel/groceries/internal/infrastructure/data/db"
+import (
+	"github.com/google/uuid"
+	"github.com/timeitel/groceries/internal/infrastructure/data/db"
+)
 
 type user struct {
-	name    string
-	isAdmin bool
+	Name       string
+	ActiveCart uuid.UUID
 }
 
 func New(u db.User) user {
 	return user{
-		name:    u.Name,
-		isAdmin: u.IsAdmin.Valid,
+		Name:       u.Name,
+		ActiveCart: u.ActiveCartID,
 	}
 }

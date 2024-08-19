@@ -2,34 +2,34 @@ package pages
 
 import (
 	"fmt"
-	"github.com/timeitel/groceries/internal/infrastructure/data/db"
+	"github.com/timeitel/groceries/internal/domain/item"
 	"github.com/timeitel/groceries/internal/web/views/layouts"
 )
 
-templ AdminProduct(p db.Product) {
+templ AdminItem(i item.Item) {
 	@layouts.Admin() {
-		@productPageContent(p)
+		@itemPageContent(i)
 	}
 }
 
-templ productPageContent(p db.Product) {
+templ itemPageContent(i item.Item) {
 	<div class="px-4 pt-2 pb-4 mb-6 w-min bg-gray-100 rounded border border-white shadow-sm">
 		<h1 class="mb-2 text-2xl font-semibold">Edit product</h1>
 		<form
 			class="flex flex-col items-start mb-4"
-			hx-put={ newURL(fmt.Sprintf("/admin/products/%d", p.ID)) }
+			hx-put={ newURL(fmt.Sprintf("/admin/products/%d", i.ID)) }
 			hx-swap="outerHTML"
 		>
 			<label>Name</label>
-			<input type="text" value={ p.Name } name="name" class="border rounded border-gray-200 mb-3 p-1 w-full" required/>
+			<input type="text" value={ i.Name } name="name" class="border rounded border-gray-200 mb-3 p-1 w-full" required/>
 			<label>Description</label>
 			<textarea type="text" name="description" class="border border-gray-200 rounded mb-4 p-1" required>
-				{ p.Description.String }
+				{ i.Description }
 			</textarea>
 			<button class="p-2 text-white bg-blue-900 rounded">Edit</button>
 		</form>
 		<form
-			hx-delete={ newURL(fmt.Sprintf("/admin/products/%d", p.ID)) }
+			hx-delete={ newURL(fmt.Sprintf("/admin/products/%d", i.ID)) }
 			hx-swap="outerHTML"
 			hx-target="body"
 			hx-replace-url="true"

@@ -8,7 +8,7 @@ import (
 	"github.com/timeitel/groceries/internal/infrastructure/data/db"
 )
 
-func (r *libSqlRepo) AddItem(itemId, cartId uuid.UUID, quantity int) (*Item, error) {
+func (r *libSqlRepo) AddItem(cartId, itemId uuid.UUID, quantity int) (*Item, error) {
 	params := db.CreateCartItemParams{
 		ItemID: itemId, CartID: cartId, Quantity: domain.NewSqlNullInt(quantity),
 	}
@@ -18,7 +18,7 @@ func (r *libSqlRepo) AddItem(itemId, cartId uuid.UUID, quantity int) (*Item, err
 		return nil, domain.NewSQLError("Creating cart item", err)
 	}
 
-	cartItem := newCartItem(ci)
+	cartItem := newItem(ci)
 
 	return &cartItem, nil
 }
