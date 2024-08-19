@@ -2,19 +2,19 @@ package pages
 
 import (
 	"fmt"
-	"github.com/timeitel/groceries/internal/types"
+	"github.com/timeitel/groceries/internal/domain/item"
 	c "github.com/timeitel/groceries/internal/web/views/components"
 	"github.com/timeitel/groceries/internal/web/views/layouts"
 )
 
-templ AdminHome(products types.Products) {
+templ AdminHome(items item.Items) {
 	@layouts.Admin() {
 		@c.AddProductForm()
 		<hr class="-mx-5 mb-6 border border-black"/>
 		<div id="products" class="flex flex-wrap gap-4">
-			for _, p := range products {
-				<a href={ templ.URL(fmt.Sprintf("/admin/products/%d", p.ID)) }>
-					@c.ProductCard(p)
+			for _, i := range items {
+				<a href={ templ.URL(fmt.Sprintf("/admin/products/%d", i.ID)) }>
+					@c.ProductCard(i)
 				</a>
 			}
 		</div>

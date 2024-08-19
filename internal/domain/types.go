@@ -1,16 +1,6 @@
-package types
+package domain
 
-import (
-	"database/sql"
-
-	"github.com/timeitel/groceries/internal/infrastructure/data/db"
-)
-
-type Products []db.Product
-type CartItems []db.CartItem
-type Carts []db.Cart
-
-type SqlInt = sql.NullInt64
+import "database/sql"
 
 func NewSqlNullInt(value int) sql.NullInt64 {
 	return sql.NullInt64{

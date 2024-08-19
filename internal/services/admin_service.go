@@ -1,63 +1,63 @@
 package services
 
 import (
-	"github.com/timeitel/groceries/internal/domain/admin"
-	"github.com/timeitel/groceries/internal/domain/shopper"
-	"github.com/timeitel/groceries/internal/infrastructure/data/db"
-	"github.com/timeitel/groceries/internal/types"
+	"github.com/google/uuid"
+	"github.com/timeitel/groceries/internal/domain/catalogue"
+	"github.com/timeitel/groceries/internal/domain/item"
 	_ "github.com/tursodatabase/go-libsql"
 )
 
 type Admin struct {
-	adminRepo   admin.RepoWriter
-	shopperRepo shopper.RepoReadWriter
+	items     item.RepoWriter
+	catalogue catalogue.RepoReader
 }
 
-func NewAdmin(adminRepo admin.RepoWriter, shopperRepo shopper.RepoReadWriter) Admin {
+// TODO: inject
+func NewAdmin() Admin {
 	return Admin{
-		adminRepo:   adminRepo,
-		shopperRepo: shopperRepo,
+		items:     item.NewLibSqlRepo(),
+		catalogue: catalogue.NewLibSqlRepo(),
 	}
 }
 
-func (s *Admin) CreateProduct(name, description string) (*db.Product, error) {
-	p, err := s.adminRepo.CreateProduct(name, description)
+func (s *Admin) CreateItem(name, description string) (*item.Item, error) {
+	i, err := s.items.Create(name, description)
 	if err != nil {
 		return nil, err
 	}
 
-	return p, nil
+	return i, nil
 }
 
-func (s *Admin) GetProduct(id int64) (*db.Product, error) {
-	p, err := s.shopperRepo.GetProduct(id)
+func (s *Admin) GetItem(id uuid.UUID) (*item.Item, error) {
+	i, err := s.catalogue.GetItem(id)
 	if err != nil {
 		return nil, err
 	}
 
-	return p, nil
+	return i, nil
 }
 
-func (s *Admin) GetProducts() (types.Products, error) {
-	p, err := s.shopperRepo.GetProducts()
+func (s *Admin) GetItems() (item.Items, error) {
+	items, err := s.catalogue.GetItems()
 	if err != nil {
 		return nil, err
 	}
 
-	return p, nil
+	return *items, nil
 }
 
-func (s *Admin) UpdateProduct(id int64, name string, description string) (*db.Product, error) {
-	p, err := s.adminRepo.UpdateProduct(id, name, description)
+func (s *Admin) UpdateItem(id uuid.UUID, name string, description string) (*item.Item, error) {
+	i, err := s.items.Update(id, name, description)
 	if err != nil {
 		return nil, err
 	}
 
-	return p, nil
+	return i, nil
 }
 
-func (s *Admin) DeleteProduct(id int64) error {
-	err := s.adminRepo.DeleteProduct(id)
+func (s *Admin) DeleteItem(id uuid.UUID) error {
+	err := s.items.Delete(id)
 	if err != nil {
 		return err
 	}

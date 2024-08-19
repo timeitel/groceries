@@ -5,15 +5,16 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/timeitel/groceries/internal/domain"
+	"github.com/timeitel/groceries/internal/domain/item"
 	"github.com/timeitel/groceries/internal/services"
-	"github.com/timeitel/groceries/internal/types"
 	"github.com/timeitel/groceries/internal/web/views/components"
 	"github.com/timeitel/groceries/internal/web/views/pages"
 )
 
 type adminPageData struct {
-	Products types.Products
-	Error    string
+	Items item.Items
+	Error string
 }
 
 type formErr struct {
@@ -21,7 +22,7 @@ type formErr struct {
 }
 
 func AdminGetProduct(c echo.Context, s *services.Admin) error {
-	id, err := getIdFromPath(c)
+	id, err := getIDFromPath(c)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)
 	}
@@ -50,7 +51,7 @@ func AdminCreateProduct(c echo.Context, s *services.Admin) error {
 
 	p, err := s.CreateProduct(name, description)
 	if err != nil {
-		if errors.Is(err, types.ErrSQLUnique) {
+		if errors.Is(err, domain.ErrSQLUnique) {
 			formErr.Error = "This product name already exists"
 			return render(c, components.AddProductForm())
 		}
@@ -64,7 +65,7 @@ func AdminCreateProduct(c echo.Context, s *services.Admin) error {
 }
 
 func AdminDeleteProduct(c echo.Context, s *services.Admin) error {
-	id, err := getIdFromPath(c)
+	id, err := getIDFromPath(c)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)
 	}
@@ -78,7 +79,7 @@ func AdminDeleteProduct(c echo.Context, s *services.Admin) error {
 }
 
 func AdminUpdateProduct(c echo.Context, s *services.Admin) error {
-	id, err := getIdFromPath(c)
+	id, err := getIDFromPath(c)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)
 	}
