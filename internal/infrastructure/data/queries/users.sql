@@ -18,3 +18,15 @@ INSERT INTO users (name, is_admin)
 RETURNING
     *;
 
+-- name: GetShopper :one
+SELECT
+    u.name,
+    u.is_admin AS isAdmin,
+    c.name
+FROM
+    users u
+    JOIN carts c ON c.id = u.active_cart_id
+    -- join and get cart items
+WHERE
+    users.id = 1;
+

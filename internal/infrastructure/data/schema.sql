@@ -1,28 +1,29 @@
-CREATE TABLE products (
-    id integer PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE items (
+    id uuid PRIMARY KEY,
     name varchar NOT NULL UNIQUE,
     description text
 );
 
 CREATE TABLE users (
-    id integer PRIMARY KEY AUTOINCREMENT,
+    id uuid PRIMARY KEY,
     name varchar NOT NULL,
     is_admin integer DEFAULT 0,
-    active_cart_id integer DEFAULT 1,
+    active_cart_id integer,
     FOREIGN KEY (active_cart_id) REFERENCES carts (id)
 );
 
-CREATE TABLE cart_products (
-    product_id integer,
-    cart_id integer,
+CREATE TABLE cart_items (
+    item_id uuid,
+    cart_id uuid,
     quantity integer DEFAULT 1,
-    FOREIGN KEY (product_id) REFERENCES products (id),
+    FOREIGN KEY (item_id) REFERENCES items (id),
     FOREIGN KEY (cart_id) REFERENCES carts (id)
 );
 
 CREATE TABLE carts (
-    id integer PRIMARY KEY AUTOINCREMENT,
-    user_id integer,
+    id uuid PRIMARY KEY,
+    user_id uuid,
+    name varchar,
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
