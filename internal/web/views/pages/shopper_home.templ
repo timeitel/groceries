@@ -30,7 +30,7 @@ templ shopperHomeCatalogue(products item.Items) {
 	<div id="products" class="flex flex-wrap gap-4">
 		for _, p := range products {
 			<a href={ templ.URL(fmt.Sprintf("/products/%d", p.ID)) }>
-				@c.ProductCard(p)
+				@c.ItemCard(p)
 			</a>
 		}
 	</div>

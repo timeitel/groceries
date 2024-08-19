@@ -21,7 +21,7 @@ type formErr struct {
 	Error string
 }
 
-func getProduct(c echo.Context, s *services.Admin) error {
+func getItem(c echo.Context, s *services.Admin) error {
 	id, err := getIDFromPath(c)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)
@@ -44,7 +44,7 @@ func getHome(c echo.Context, s *services.Admin) error {
 	return render(c, pages.AdminHome(p))
 }
 
-func createProduct(c echo.Context, s *services.Admin) error {
+func createItem(c echo.Context, s *services.Admin) error {
 	name := c.FormValue("name")
 	description := c.FormValue("description")
 	formErr := formErr{Error: ""}
@@ -53,18 +53,18 @@ func createProduct(c echo.Context, s *services.Admin) error {
 	if err != nil {
 		if errors.Is(err, domain.ErrSQLUnique) {
 			formErr.Error = "This product name already exists"
-			return render(c, components.AddProductForm())
+			return render(c, components.AddItemForm())
 		}
 
-		return render(c, components.AddProductForm())
+		return render(c, components.AddItemForm())
 	}
 
-	render(c, components.CreatedProductCard(*p))
+	render(c, components.CreatedItemCard(*p))
 
-	return render(c, components.AddProductForm())
+	return render(c, components.AddItemForm())
 }
 
-func deleteProduct(c echo.Context, s *services.Admin) error {
+func deleteItem(c echo.Context, s *services.Admin) error {
 	id, err := getIDFromPath(c)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)
@@ -78,7 +78,7 @@ func deleteProduct(c echo.Context, s *services.Admin) error {
 	return c.Redirect(http.StatusSeeOther, "/admin")
 }
 
-func updateProduct(c echo.Context, s *services.Admin) error {
+func updateItem(c echo.Context, s *services.Admin) error {
 	id, err := getIDFromPath(c)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)

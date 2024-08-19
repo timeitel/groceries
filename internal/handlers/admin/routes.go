@@ -12,20 +12,20 @@ func Routes(e *echo.Echo) {
 	protected.GET("", func(c echo.Context) error {
 		return getHome(c, &service)
 	})
-	protected.GET("/products/:id", func(c echo.Context) error {
-		return getProduct(c, &service)
+	protected.GET("/items/:id", func(c echo.Context) error {
+		return getItem(c, &service)
 	})
 
-	protected.POST("/products", func(c echo.Context) error {
-		return createProduct(c, &service)
+	protected.POST("/items", func(c echo.Context) error {
+		return createItem(c, &service)
 	})
 
-	protected.PUT("/products/:id", func(c echo.Context) error {
-		return updateProduct(c, &service)
+	protected.PUT("/items/:id", func(c echo.Context) error {
+		return updateItem(c, &service)
 	})
 
-	protected.DELETE("/products/:id", func(c echo.Context) error {
-		return deleteProduct(c, &service)
+	protected.DELETE("/items/:id", func(c echo.Context) error {
+		return deleteItem(c, &service)
 	})
 
 }

@@ -12,11 +12,11 @@ func Routes(e *echo.Echo) {
 		return getHome(c, &service)
 	})
 
-	e.GET("/products/:id", func(c echo.Context) error {
+	e.GET("/items/:id", func(c echo.Context) error {
 		return getItem(c, &service)
 	})
 
-	e.POST("/products/:id", func(c echo.Context) error {
+	e.POST("/items/:id", func(c echo.Context) error {
 		return addItem(c, &service)
 	})
 }
