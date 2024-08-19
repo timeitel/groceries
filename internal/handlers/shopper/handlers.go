@@ -30,6 +30,9 @@ func getHome(c echo.Context, service *services.Shopper) error {
 	}
 
 	cartItems, err := service.GetCartItems()
+	if err != nil {
+		return echo.NewHTTPError(http.StatusInternalServerError)
+	}
 
 	vm := pages.ShopperHomeViewModel{
 		Items:     *items,

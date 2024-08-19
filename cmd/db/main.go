@@ -7,28 +7,55 @@ import (
 	"log"
 	"os"
 
+	"github.com/google/uuid"
+	"github.com/timeitel/groceries/internal/domain"
+	"github.com/timeitel/groceries/internal/infrastructure/data/db"
 	_ "github.com/tursodatabase/go-libsql"
 )
 
 func main() {
+	if len(os.Args) < 2 {
+		log.Fatal("DB path not passed as arg")
+	}
+
+	dbPath := os.Args[1]
+
+	conn, err := sql.Open("libsql", dbPath)
+	if err != nil {
+		log.Fatal("Unable to open db", err)
+	}
+
+	tx, err := conn.Begin()
+	if err != nil {
+		log.Fatal("Begin tx", err)
+	}
+	defer tx.Rollback()
+
+	queries := db.New(conn)
+	qtx := queries.WithTx(tx)
 	ctx := context.Background()
-	url, exists := os.LookupEnv("DB_URL")
-	if !exists {
-		log.Fatalln("No env set under DB_URL")
+	userID := uuid.New()
+	cartParams := db.CreateCartParams{
+		UserID: userID,
+		Name:   domain.NewSqlNullString("cart juan"),
 	}
 
-	db, err := sql.Open("libsql", url)
+	cart, err := qtx.CreateCart(ctx, cartParams)
 	if err != nil {
-		log.Fatal("Unable to open db", url, err)
+		log.Fatal("Create cart", err)
 	}
 
-	res, err := db.ExecContext(ctx, "schema.sql")
+	userParams := db.CreateUserParams{
+		ActiveCartID: cart.ID,
+		Name:         "cool guy",
+	}
+
+	user, err := qtx.CreateUser(ctx, userParams)
 	if err != nil {
-		log.Fatalln("Unable to create schema", err)
+		log.Fatal("Create user", err)
 	}
 
-	// TODO: db seeding for products and admin user
+	tx.Commit()
 
-	fmt.Printf("Rows Affected: %d\n", res)
-	fmt.Printf("Created database schema")
+	fmt.Printf("User created %v", user)
 }
