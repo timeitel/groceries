@@ -2,6 +2,7 @@ package pages
 
 import (
 	"fmt"
+	"github.com/timeitel/groceries/internal/domain/shopper"
 	"github.com/timeitel/groceries/internal/types"
 	c "github.com/timeitel/groceries/internal/web/views/components"
 	"github.com/timeitel/groceries/internal/web/views/layouts"
@@ -9,21 +10,39 @@ import (
 
 type ShopperHomeViewModel struct {
 	Products types.Products
-	Name     string
+	Shopper  shopper.Shopper
 }
 
 templ ShopperHome(vm ShopperHomeViewModel) {
-	@layouts.Shopper(shopperHomeHeading(vm.Name)) {
-		<div id="products" class="flex flex-wrap gap-4">
-			for _, p := range vm.Products {
-				<a href={ templ.URL(fmt.Sprintf("/products/%d", p.ID)) }>
-					@c.ProductCard(p)
-				</a>
-			}
-		</div>
+	@layouts.Shopper(shopperHomeHeading(vm.Shopper.UserName)) {
+		@shopperHomeCatalogue(vm.Products)
+		@shopperHomeCart(vm.Shopper.CartItems)
 	}
 }
 
 templ shopperHomeHeading(name string) {
 	Hey { name }, here's your shopping list
+}
+
+templ shopperHomeCatalogue(products types.Products) {
+	<h1 class="text-lg font-semibold">Catalogue</h1>
+	<div id="products" class="flex flex-wrap gap-4">
+		for _, p := range products {
+			<a href={ templ.URL(fmt.Sprintf("/products/%d", p.ID)) }>
+				@c.ProductCard(p)
+			</a>
+		}
+	</div>
+}
+
+templ shopperHomeCart(items types.CartItems) {
+	<h1 class="text-lg font-semibold">Cart</h1>
+	<div id="cart" class="flex flex-col">
+		for idx, i := range items {
+			<div>
+				<input type="checkbox" value={ string(idx) }/>
+				<label>{ string(i.ProductID.Int64) }</label>
+			</div>
+		}
+	</div>
 }

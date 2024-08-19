@@ -4,4 +4,7 @@ import (
 	"github.com/timeitel/groceries/internal/infrastructure/data/db"
 )
 
-type shopper = db.GetShopperRow
+type Shopper struct {
+	UserName  string
+	CartItems []db.CartItem
+}

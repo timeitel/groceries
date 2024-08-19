@@ -4,7 +4,10 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/timeitel/groceries/internal/domain/shopper"
+	"github.com/timeitel/groceries/internal/infrastructure/data/db"
 	"github.com/timeitel/groceries/internal/services"
+	"github.com/timeitel/groceries/internal/types"
 	"github.com/timeitel/groceries/internal/web/views/components"
 	"github.com/timeitel/groceries/internal/web/views/pages"
 )
@@ -26,7 +29,12 @@ func ShopperGetHome(c echo.Context, service *services.User) error {
 
 	vm := pages.ShopperHomeViewModel{
 		Products: products,
-		Name:     "Cool guy",
+		Shopper: shopper.Shopper{
+			UserName: "cool guy",
+			CartItems: []db.CartItem{
+				{ProductID: types.NewSqlNullInt(1), CartID: types.NewSqlNullInt(1), Quantity: types.NewSqlNullInt(1)},
+			},
+		},
 	}
 
 	return render(c, pages.ShopperHome(vm))
