@@ -1,4 +1,4 @@
-package handlers
+package admin
 
 import (
 	"errors"
@@ -21,7 +21,7 @@ type formErr struct {
 	Error string
 }
 
-func AdminGetProduct(c echo.Context, s *services.Admin) error {
+func getProduct(c echo.Context, s *services.Admin) error {
 	id, err := getIDFromPath(c)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)
@@ -35,7 +35,7 @@ func AdminGetProduct(c echo.Context, s *services.Admin) error {
 	return render(c, pages.AdminItem(*p))
 }
 
-func AdminGetHome(c echo.Context, s *services.Admin) error {
+func getHome(c echo.Context, s *services.Admin) error {
 	p, err := s.GetItems()
 	if err != nil {
 		return err
@@ -44,7 +44,7 @@ func AdminGetHome(c echo.Context, s *services.Admin) error {
 	return render(c, pages.AdminHome(p))
 }
 
-func AdminCreateProduct(c echo.Context, s *services.Admin) error {
+func createProduct(c echo.Context, s *services.Admin) error {
 	name := c.FormValue("name")
 	description := c.FormValue("description")
 	formErr := formErr{Error: ""}
@@ -64,7 +64,7 @@ func AdminCreateProduct(c echo.Context, s *services.Admin) error {
 	return render(c, components.AddProductForm())
 }
 
-func AdminDeleteProduct(c echo.Context, s *services.Admin) error {
+func deleteProduct(c echo.Context, s *services.Admin) error {
 	id, err := getIDFromPath(c)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)
@@ -78,7 +78,7 @@ func AdminDeleteProduct(c echo.Context, s *services.Admin) error {
 	return c.Redirect(http.StatusSeeOther, "/admin")
 }
 
-func AdminUpdateProduct(c echo.Context, s *services.Admin) error {
+func updateProduct(c echo.Context, s *services.Admin) error {
 	id, err := getIDFromPath(c)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)

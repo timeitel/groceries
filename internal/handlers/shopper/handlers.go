@@ -1,4 +1,4 @@
-package handlers
+package shopper
 
 import (
 	"net/http"
@@ -9,7 +9,7 @@ import (
 	"github.com/timeitel/groceries/internal/web/views/pages"
 )
 
-func ShopperAddItem(c echo.Context, service *services.Shopper) error {
+func addItem(c echo.Context, service *services.Shopper) error {
 	id, err := getIDFromPath(c)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, "invalid ID")
@@ -23,7 +23,7 @@ func ShopperAddItem(c echo.Context, service *services.Shopper) error {
 	return render(c, components.CartItemCard(*item))
 }
 
-func ShopperGetHome(c echo.Context, service *services.Shopper) error {
+func getHome(c echo.Context, service *services.Shopper) error {
 	items, err := service.GetItems()
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError)
@@ -40,7 +40,7 @@ func ShopperGetHome(c echo.Context, service *services.Shopper) error {
 	return render(c, pages.ShopperHome(vm))
 }
 
-func ShopperGetItem(c echo.Context, s *services.Shopper) error {
+func getItem(c echo.Context, s *services.Shopper) error {
 	id, err := getIDFromPath(c)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, "Invalid id")

@@ -1,4 +1,4 @@
-package handlers
+package shopper
 
 import (
 	"github.com/google/uuid"
