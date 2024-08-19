@@ -4,3 +4,11 @@ INSERT INTO carts (user_id, name)
 RETURNING
     *;
 
+-- name: GetCart :one
+SELECT
+    *
+FROM
+    carts
+WHERE
+    id = ?;
+

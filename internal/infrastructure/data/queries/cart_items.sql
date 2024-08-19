@@ -20,3 +20,11 @@ WHERE
 RETURNING
     *;
 
+-- name: GetCartItems :many
+SELECT
+    *
+FROM
+    cart_items
+WHERE
+    cart_id = ?;
+
