@@ -25,37 +25,25 @@ func main() {
 		log.Fatal("Unable to open db", err)
 	}
 
-	tx, err := conn.Begin()
-	if err != nil {
-		log.Fatal("Begin tx", err)
-	}
-	defer tx.Rollback()
-
-	queries := db.New(conn)
-	qtx := queries.WithTx(tx)
+	q := db.New(conn)
 	ctx := context.Background()
-	userID := uuid.New()
-	cartParams := db.CreateCartParams{
-		UserID: userID,
+
+	user, err := q.CreateUser(ctx, db.CreateUserParams{
+		ID:   uuid.New(),
+		Name: "Cool guy",
+	})
+	if err != nil {
+		log.Fatalln("Creating user", err)
+	}
+
+	cart, err := q.CreateCart(ctx, db.CreateCartParams{
+		UserID: user.ID,
 		Name:   domain.NewSqlNullString("cart juan"),
-	}
-
-	cart, err := qtx.CreateCart(ctx, cartParams)
+	})
 	if err != nil {
-		log.Fatal("Create cart", err)
+		log.Fatalln("Creating cart", err)
 	}
-
-	userParams := db.CreateUserParams{
-		ActiveCartID: cart.ID,
-		Name:         "cool guy",
-	}
-
-	user, err := qtx.CreateUser(ctx, userParams)
-	if err != nil {
-		log.Fatal("Create user", err)
-	}
-
-	tx.Commit()
 
 	fmt.Printf("User created %v", user)
+	fmt.Printf("Cart created %v", cart)
 }

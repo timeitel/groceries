@@ -1,5 +1,5 @@
 -- name: CreateUser :one
-INSERT INTO users (name, active_cart_id)
+INSERT INTO users (id, name)
     VALUES (?, ?)
 RETURNING
     *;
