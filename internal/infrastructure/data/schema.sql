@@ -18,6 +18,7 @@ CREATE TABLE carts (
 );
 
 CREATE TABLE cart_items (
+    id uuid NOT NULL,
     item_id uuid NOT NULL,
     cart_id uuid NOT NULL,
     quantity integer DEFAULT 1,

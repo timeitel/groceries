@@ -7,7 +7,6 @@ import (
 	"log"
 	"os"
 
-	"github.com/google/uuid"
 	"github.com/timeitel/groceries/internal/domain"
 	"github.com/timeitel/groceries/internal/infrastructure/data/db"
 	_ "github.com/tursodatabase/go-libsql"
@@ -28,10 +27,7 @@ func main() {
 	q := db.New(conn)
 	ctx := context.Background()
 
-	user, err := q.CreateUser(ctx, db.CreateUserParams{
-		ID:   uuid.New(),
-		Name: "Cool guy",
-	})
+	user, err := q.CreateUser(ctx, "Cool guy")
 	if err != nil {
 		log.Fatalln("Creating user", err)
 	}
@@ -44,6 +40,6 @@ func main() {
 		log.Fatalln("Creating cart", err)
 	}
 
-	fmt.Printf("User created %v", user)
-	fmt.Printf("Cart created %v", cart)
+	fmt.Printf("User created: %s, admin: %v\n", user.Name, user.IsAdmin.Bool)
+	fmt.Printf("Cart created: %v\n", cart.Name.String)
 }

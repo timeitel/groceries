@@ -1,6 +1,6 @@
 -- name: CreateUser :one
 INSERT INTO users (id, name)
-    VALUES (?, ?)
+    VALUES (uuid (), ?)
 RETURNING
     *;
 
@@ -13,20 +13,8 @@ WHERE
     id = ?;
 
 -- name: CreateAdminUser :one
-INSERT INTO users (name, is_admin)
-    VALUES (?, 1)
+INSERT INTO users (id, name, is_admin)
+    VALUES (uuid (), ?, 1)
 RETURNING
     *;
-
--- name: GetShopper :one
-SELECT
-    u.name,
-    u.is_admin AS isAdmin,
-    c.name
-FROM
-    users u
-    JOIN carts c ON c.id = u.active_cart_id
-    -- join and get cart items
-WHERE
-    users.id = 1;
 

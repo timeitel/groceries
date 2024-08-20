@@ -1,22 +1,20 @@
 -- name: CreateCartItem :one
-INSERT INTO cart_items (item_id, cart_id, quantity)
-    VALUES (?, ?, ?)
+INSERT INTO cart_items (id, item_id, cart_id, quantity)
+    VALUES (uuid (), ?, ?, ?)
 RETURNING
     *;
 
 -- name: DeleteCartItem :exec
-INSERT INTO cart_items (cart_id, item_id)
-    VALUES (?, ?)
-RETURNING
-    *;
+DELETE FROM cart_items
+WHERE id = ?;
 
 -- name: UpdateCartItemQuantity :one
 UPDATE
     cart_items
 SET
-    "quantity" = ?
+    quantity = ?
 WHERE
-    item_id = ?
+    id = ?
 RETURNING
     *;
 

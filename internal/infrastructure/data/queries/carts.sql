@@ -1,6 +1,6 @@
 -- name: CreateCart :one
-INSERT INTO carts (user_id, name)
-    VALUES (?, ?)
+INSERT INTO carts (id, user_id, name)
+    VALUES (uuid (), ?, ?)
 RETURNING
     *;
 
