@@ -23,12 +23,8 @@ func (r *libSqlRepo) AddItem(cartId, itemId uuid.UUID, quantity int) (*Item, err
 	return &cartItem, nil
 }
 
-func (r *libSqlRepo) RemoveItem(cartId, itemId uuid.UUID) error {
-	params := db.DeleteCartItemParams{
-		CartID: cartId, ItemID: itemId,
-	}
-
-	err := r.db.DeleteCartItem(context.Background(), params)
+func (r *libSqlRepo) RemoveItem(cartItemId uuid.UUID) error {
+	err := r.db.DeleteCartItem(context.Background(), cartItemId)
 	if err != nil {
 		return domain.NewSQLError("deleting cart item", err)
 	}

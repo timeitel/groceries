@@ -6,13 +6,13 @@ import (
 )
 
 type user struct {
-	Name       string
-	ActiveCart uuid.UUID
+	ID   uuid.UUID
+	Name string
 }
 
 func New(u db.User) user {
 	return user{
-		Name:       u.Name,
-		ActiveCart: u.ActiveCartID,
+		ID:   u.ID,
+		Name: u.Name,
 	}
 }

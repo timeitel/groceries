@@ -11,7 +11,7 @@ import (
 
 type Shopper struct {
 	catalogue catalogue.RepoReader
-	cart      cart.RepoWriter
+	cart      cart.RepoReadWriter
 	user      user.RepoReader
 }
 
@@ -30,7 +30,12 @@ func (s *Shopper) AddItemToCart(itemID uuid.UUID, quantity int) (*cart.Item, err
 		return nil, err
 	}
 
-	item, err := s.cart.AddItem(itemID, user.ActiveCart, quantity)
+	cart, err := s.cart.Get(user.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	item, err := s.cart.AddItem(cart.ID, itemID, quantity)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +67,7 @@ func (s *Shopper) GetCartItems() (*cart.Items, error) {
 		return nil, err
 	}
 
-	items, err := s.cart.GetItems(user.ActiveCart)
+	items, err := s.cart.GetItems(user.ID)
 	if err != nil {
 		return nil, err
 	}

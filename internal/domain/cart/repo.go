@@ -2,11 +2,26 @@ package cart
 
 import (
 	"github.com/google/uuid"
+	"github.com/timeitel/groceries/internal/infrastructure/data"
+	"github.com/timeitel/groceries/internal/infrastructure/data/db"
 )
 
-type RepoWriter interface {
-	GetItems(cartID uuid.UUID) (*Items, error)
+type RepoReadWriter interface {
+	Get(userID uuid.UUID) (*cart, error)
+	GetItems(userID uuid.UUID) (*Items, error)
 	AddItem(cartID, itemID uuid.UUID, quantity int) (*Item, error)
-	RemoveItem(cartID, itemID uuid.UUID) error
+	RemoveItem(cartItemID uuid.UUID) error
 	UpdateItemQuantity(quantity int) (*int, error)
+}
+
+type libSqlRepo struct {
+	db *db.Queries
+}
+
+func NewLibSqlRepo() RepoReadWriter {
+	conn := data.NewLibSqlDB()
+
+	return &libSqlRepo{
+		db: conn,
+	}
 }
