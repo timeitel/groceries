@@ -2,10 +2,9 @@
 
 - htmx
 - go
-- sqlite
 - docker
-- libsql / sqlite (sqlc)
-- migrations (goose)
+- libsql / sqlite, 
+- sqlc (sql -> go types code-gen) & goose (migrations) 
 
 ### Dev
 
