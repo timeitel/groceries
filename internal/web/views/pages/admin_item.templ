@@ -17,7 +17,7 @@ templ itemPageContent(i item.Item) {
 		<h1 class="mb-2 text-2xl font-semibold">Edit product</h1>
 		<form
 			class="flex flex-col items-start mb-4"
-			hx-put={ newURL(fmt.Sprintf("/admin/products/%d", i.ID)) }
+			hx-put={ newURL(fmt.Sprintf("/admin/items/%d", i.ID)) }
 			hx-swap="outerHTML"
 		>
 			<label>Name</label>
@@ -29,7 +29,7 @@ templ itemPageContent(i item.Item) {
 			<button class="p-2 text-white bg-blue-900 rounded">Edit</button>
 		</form>
 		<form
-			hx-delete={ newURL(fmt.Sprintf("/admin/products/%d", i.ID)) }
+			hx-delete={ newURL(fmt.Sprintf("/admin/items/%d", i.ID)) }
 			hx-swap="outerHTML"
 			hx-target="body"
 			hx-replace-url="true"

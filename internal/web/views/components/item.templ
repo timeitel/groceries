@@ -1,52 +1,56 @@
 package components
 
 import (
-"fmt"
-"github.com/timeitel/groceries/internal/domain/item"
+	"fmt"
+	"github.com/timeitel/groceries/internal/domain/item"
 )
 
 templ UpdatedItem(i item.Item) {
-<h1>Updated product:</h1>
-<div class="w-48 bg-gray-100 rounded border border-white shadow-sm">
-  <div class="py-2 px-4 border-b border-white">
-    <strong>{ i.Name }</strong>
-  </div>
-  <div class="py-2 px-4">{ i.Description }</div>
-</div>
+	<h1>Updated product:</h1>
+	<div class="w-48 bg-gray-100 rounded border border-white shadow-sm">
+		<div class="py-2 px-4 border-b border-white">
+			<strong>{ i.Name }</strong>
+		</div>
+		<div class="py-2 px-4">{ i.Description }</div>
+	</div>
 }
 
 templ ItemCard(p item.Item) {
-<div class="w-48 bg-gray-100 rounded border border-white shadow-sm">
-  <div class="py-2 px-4 border-b border-white">
-    <strong>{ p.Name }</strong>
-  </div>
-  <div class="py-2 px-4">{ p.Description }</div>
-</div>
+	<div class="w-48 bg-gray-100 rounded border border-white shadow-sm">
+		<div class="py-2 px-4 border-b border-white">
+			<strong>{ p.Name }</strong>
+		</div>
+		<div class="py-2 px-4">{ p.Description }</div>
+	</div>
 }
 
 templ CreatedItemCard(i item.Item) {
-<div hx-swap-oob="afterbegin" id="products">
-  <a href={ templ.URL(fmt.Sprintf("/admin/products/%d", i.ID)) }>
-    <div class="w-48 bg-gray-100 rounded border border-white shadow-sm">
-      <div class="py-2 px-4 border-b border-white">
-        <strong>{ i.Name }</strong>
-      </div>
-      <div class="py-2 px-4">{ i.Description }</div>
-    </div>
-  </a>
-</div>
+	<div hx-swap-oob="afterbegin" id="items">
+		<a href={ templ.URL(fmt.Sprintf("/admin/items/%d", i.ID)) }>
+			<div class="w-48 bg-gray-100 rounded border border-white shadow-sm">
+				<div class="py-2 px-4 border-b border-white">
+					<strong>{ i.Name }</strong>
+				</div>
+				<div class="py-2 px-4">{ i.Description }</div>
+			</div>
+		</a>
+	</div>
 }
 
 templ AddItemForm() {
-<div class="px-4 pt-2 pb-4 mb-6 w-min bg-gray-100 rounded border border-white shadow-sm" id="add-product-form">
-  <h1 class="mb-2 text-2xl font-semibold">Create product</h1>
-  <form class="flex flex-col items-start mb-0" hx-post={ newURL("/admin/products") } hx-swap="outerHTML"
-    hx-target="#add-product-form">
-    <label>Name</label>
-    <input type="text" name="name" class="mb-3" required />
-    <label>Description</label>
-    <textarea type="text" name="description" class="mb-4" required></textarea>
-    <button class="p-2 text-white bg-blue-900 rounded">Create</button>
-  </form>
-</div>
+	<div class="px-4 pt-2 pb-4 mb-6 w-min bg-gray-100 rounded border border-white shadow-sm" id="add-product-form">
+		<h1 class="mb-2 text-2xl font-semibold">Create product</h1>
+		<form
+			class="flex flex-col items-start mb-0"
+			hx-post={ newURL("/admin/items") }
+			hx-swap="outerHTML"
+			hx-target="#add-product-form"
+		>
+			<label>Name</label>
+			<input type="text" name="name" class="mb-3" required/>
+			<label>Description</label>
+			<textarea type="text" name="description" class="mb-4" required></textarea>
+			<button class="p-2 text-white bg-blue-900 rounded">Create</button>
+		</form>
+	</div>
 }

@@ -25,11 +25,11 @@ templ shopperHomeHeading(name string) {
 	Hey { name }, here's your shopping list
 }
 
-templ shopperHomeCatalogue(products item.Items) {
+templ shopperHomeCatalogue(items item.Items) {
 	<h1 class="text-lg font-semibold">Catalogue</h1>
-	<div id="products" class="flex flex-wrap gap-4">
-		for _, p := range products {
-			<a href={ templ.URL(fmt.Sprintf("/products/%d", p.ID)) }>
+	<div id="items" class="flex flex-wrap gap-4">
+		for _, p := range items {
+			<a href={ templ.URL(fmt.Sprintf("/items/%d", p.ID)) }>
 				@c.ItemCard(p)
 			</a>
 		}
