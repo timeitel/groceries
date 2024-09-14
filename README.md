@@ -9,4 +9,3 @@
 ### Dev
 
 `docker compose up --watch`
-`templ generate --watch` 
