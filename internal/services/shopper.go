@@ -1,7 +1,6 @@
 package services
 
 import (
-	"github.com/google/uuid"
 	"github.com/timeitel/groceries/internal/domain/cart"
 	"github.com/timeitel/groceries/internal/domain/catalogue"
 	"github.com/timeitel/groceries/internal/domain/item"
@@ -24,7 +23,7 @@ func NewShopper() Shopper {
 	}
 }
 
-func (s *Shopper) AddItemToCart(itemID uuid.UUID, quantity int) (*cart.Item, error) {
+func (s *Shopper) AddItemToCart(itemID int64, quantity int) (*cart.Item, error) {
 	user, err := s.user.Get()
 	if err != nil {
 		return nil, err
@@ -52,7 +51,7 @@ func (s *Shopper) GetItems() (*item.Items, error) {
 	return items, nil
 }
 
-func (s *Shopper) GetItem(id uuid.UUID) (*item.Item, error) {
+func (s *Shopper) GetItem(id int64) (*item.Item, error) {
 	item, err := s.catalogue.GetItem(id)
 	if err != nil {
 		return nil, err

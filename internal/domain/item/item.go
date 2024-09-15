@@ -1,14 +1,13 @@
 package item
 
 import (
-	"github.com/google/uuid"
 	"github.com/timeitel/groceries/internal/infrastructure/data/db"
 )
 
 type Items []Item
 
 type Item struct {
-	ID          uuid.UUID
+	ID          int64
 	Name        string
 	Description string
 }

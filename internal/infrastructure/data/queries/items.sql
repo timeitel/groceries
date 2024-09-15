@@ -1,6 +1,6 @@
 -- name: CreateItem :one
-INSERT INTO items (id, name, description)
-    VALUES (uuid (), ?, ?)
+INSERT INTO items (name, description)
+    VALUES (?, ?)
 RETURNING
     *;
 

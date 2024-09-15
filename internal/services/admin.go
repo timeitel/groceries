@@ -1,7 +1,6 @@
 package services
 
 import (
-	"github.com/google/uuid"
 	"github.com/timeitel/groceries/internal/domain/catalogue"
 	"github.com/timeitel/groceries/internal/domain/item"
 	_ "github.com/tursodatabase/go-libsql"
@@ -29,7 +28,7 @@ func (s *Admin) CreateItem(name, description string) (*item.Item, error) {
 	return i, nil
 }
 
-func (s *Admin) GetItem(id uuid.UUID) (*item.Item, error) {
+func (s *Admin) GetItem(id int64) (*item.Item, error) {
 	i, err := s.catalogue.GetItem(id)
 	if err != nil {
 		return nil, err
@@ -47,7 +46,7 @@ func (s *Admin) GetItems() (item.Items, error) {
 	return *items, nil
 }
 
-func (s *Admin) UpdateItem(id uuid.UUID, name string, description string) (*item.Item, error) {
+func (s *Admin) UpdateItem(id int64, name string, description string) (*item.Item, error) {
 	i, err := s.items.Update(id, name, description)
 	if err != nil {
 		return nil, err
@@ -56,7 +55,7 @@ func (s *Admin) UpdateItem(id uuid.UUID, name string, description string) (*item
 	return i, nil
 }
 
-func (s *Admin) DeleteItem(id uuid.UUID) error {
+func (s *Admin) DeleteItem(id int64) error {
 	err := s.items.Delete(id)
 	if err != nil {
 		return err

@@ -1,5 +1,5 @@
 CREATE TABLE items (
-    id uuid PRIMARY KEY,
+    id integer PRIMARY KEY AUTOINCREMENT,
     name varchar NOT NULL UNIQUE,
     description text
 );
@@ -19,7 +19,7 @@ CREATE TABLE carts (
 
 CREATE TABLE cart_items (
     id uuid NOT NULL,
-    item_id uuid NOT NULL,
+    item_id integer NOT NULL,
     cart_id uuid NOT NULL,
     quantity integer DEFAULT 1,
     FOREIGN KEY (item_id) REFERENCES items (id),

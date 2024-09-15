@@ -3,7 +3,6 @@ package item
 import (
 	"context"
 
-	"github.com/google/uuid"
 	"github.com/timeitel/groceries/internal/domain"
 	"github.com/timeitel/groceries/internal/infrastructure/data/db"
 )
@@ -24,7 +23,7 @@ func (r *libSqlRepo) Create(name, description string) (*Item, error) {
 	return &item, nil
 }
 
-func (r *libSqlRepo) Delete(id uuid.UUID) error {
+func (r *libSqlRepo) Delete(id int64) error {
 	err := r.db.DeleteItem(context.Background(), id)
 	if err != nil {
 		return domain.NewSQLError("Deleting product", err)
@@ -33,7 +32,7 @@ func (r *libSqlRepo) Delete(id uuid.UUID) error {
 	return nil
 }
 
-func (r *libSqlRepo) Update(id uuid.UUID, name, description string) (*Item, error) {
+func (r *libSqlRepo) Update(id int64, name, description string) (*Item, error) {
 	params := db.UpdateItemParams{
 		ID:          id,
 		Name:        name,

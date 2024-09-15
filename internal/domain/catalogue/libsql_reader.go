@@ -3,11 +3,10 @@ package catalogue
 import (
 	"context"
 
-	"github.com/google/uuid"
 	"github.com/timeitel/groceries/internal/domain/item"
 )
 
-func (r *libSqlRepo) GetItem(id uuid.UUID) (*item.Item, error) {
+func (r *libSqlRepo) GetItem(id int64) (*item.Item, error) {
 	i, err := r.db.GetItem(context.Background(), id)
 	if err != nil {
 		return nil, err

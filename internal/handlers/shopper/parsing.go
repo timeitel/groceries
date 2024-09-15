@@ -1,16 +1,17 @@
 package shopper
 
 import (
-	"github.com/google/uuid"
+	"strconv"
+
 	"github.com/labstack/echo/v4"
 )
 
-func getIDFromPath(c echo.Context) (*uuid.UUID, error) {
+func getIDFromPath(c echo.Context) (*int64, error) {
 	idParam := c.Param("id")
-	uuid, err := uuid.Parse(idParam)
+	id, err := strconv.ParseInt(idParam, 10, 64)
 	if err != nil {
 		return nil, err
 	}
 
-	return &uuid, nil
+	return &id, nil
 }
