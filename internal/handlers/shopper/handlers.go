@@ -54,5 +54,5 @@ func getItem(c echo.Context, s *services.Shopper) error {
 		return echo.NewHTTPError(http.StatusBadRequest, "No item with that id")
 	}
 
-	return render(c, pages.ShopperProduct(*i))
+	return render(c, pages.ShopperItem(*i))
 }

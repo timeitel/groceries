@@ -13,7 +13,7 @@ templ AdminHome(items item.Items) {
 		<hr class="-mx-5 mb-6 border border-black"/>
 		<div id="items" class="flex flex-wrap gap-4">
 			for _, i := range items {
-				<a href={ templ.URL(fmt.Sprintf("/admin/items/%s", i.ID)) }>
+				<a href={ templ.URL(fmt.Sprintf("/admin/items/%d", i.ID)) }>
 					@c.ItemCard(i)
 				</a>
 			}

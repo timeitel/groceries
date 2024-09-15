@@ -6,18 +6,18 @@ import (
 	"github.com/timeitel/groceries/internal/web/views/layouts"
 )
 
-templ ShopperProduct(i item.Item) {
-	@layouts.Shopper(shopperProductHeading()) {
-		@shopperProductContent(i)
+templ ShopperItem(i item.Item) {
+	@layouts.Shopper(shopperItemHeading()) {
+		@shopperItemContent(i)
 	}
 }
 
-templ shopperProductContent(i item.Item) {
-	<h1 class="mb-2 text-2xl font-semibold">Product</h1>
+templ shopperItemContent(i item.Item) {
+	<h1 class="mb-2 text-2xl font-semibold">Item</h1>
 	@components.ItemCard(i)
 }
 
-templ shopperProductHeading() {
+templ shopperItemHeading() {
 	<a href="/">
 		{ "< Home" }
 	</a>
