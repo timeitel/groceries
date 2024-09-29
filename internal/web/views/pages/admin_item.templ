@@ -14,7 +14,7 @@ templ AdminItem(i item.Item) {
 
 templ itemPageContent(i item.Item) {
 	<div class="px-4 pt-2 pb-4 mb-6 w-min bg-gray-100 rounded border border-white shadow-sm">
-		<h1 class="mb-2 text-2xl font-semibold">Edit product</h1>
+		<h1 class="mb-2 text-2xl font-semibold">Edit item</h1>
 		<form
 			class="flex flex-col items-start mb-4"
 			hx-put={ newURL(fmt.Sprintf("/admin/items/%d", i.ID)) }

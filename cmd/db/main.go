@@ -13,11 +13,13 @@ import (
 )
 
 func main() {
-	if len(os.Args) < 2 {
-		log.Fatal("DB path not passed as arg")
-	}
+	var dbPath string
 
-	dbPath := os.Args[1]
+	if len(os.Args) < 2 {
+		dbPath = "file:/data/groceries.db"
+	} else {
+		dbPath = os.Args[1]
+	}
 
 	conn, err := sql.Open("libsql", dbPath)
 	if err != nil {
