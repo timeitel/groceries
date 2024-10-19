@@ -13,11 +13,9 @@ import (
 )
 
 func main() {
-	var dbPath string
+	dbPath := "file:/data/groceries.db"
 
-	if len(os.Args) < 2 {
-		dbPath = "file:/data/groceries.db"
-	} else {
+	if len(os.Args) >= 2 {
 		dbPath = os.Args[1]
 	}
 
