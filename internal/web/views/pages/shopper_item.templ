@@ -1,0 +1,24 @@
+package pages
+
+import (
+	"github.com/timeitel/groceries/internal/domain/item"
+	"github.com/timeitel/groceries/internal/web/views/components"
+	"github.com/timeitel/groceries/internal/web/views/layouts"
+)
+
+templ ShopperItem(i item.Item) {
+	@layouts.Shopper(shopperItemHeading()) {
+		@shopperItemContent(i)
+	}
+}
+
+templ shopperItemContent(i item.Item) {
+	<h1 class="mb-2 text-2xl font-semibold">Item</h1>
+	@components.ItemCard(i)
+}
+
+templ shopperItemHeading() {
+	<a href="/">
+		{ "< Home" }
+	</a>
+}

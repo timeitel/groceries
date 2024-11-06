@@ -1,27 +1,29 @@
-FROM golang:1.22 AS dev
+FROM golang:1.23 AS dev
 WORKDIR /app
+RUN go install github.com/a-h/templ/cmd/templ@latest
 RUN go install github.com/air-verse/air@latest
 RUN curl -sLo /usr/local/bin/tailwindcss https://github.com/tailwindlabs/tailwindcss/releases/download/v3.4.7/tailwindcss-linux-x64
 RUN chmod +x /usr/local/bin/tailwindcss
 COPY go.mod go.sum ./
 RUN go mod download
+RUN apt update && apt install sqlite3
 COPY . .
-RUN ["tailwindcss", "-i", "./static/css/input.css", "-o", "./static/css/output.css", "--minify"]
+RUN mkdir /data
+RUN sqlite3 /data/groceries.db < ./internal/infrastructure/data/schema.sql
+RUN tailwindcss -i ./internal/web/static/css/input.css -o ./internal/web/static/css/output.css --minify
 CMD ["air"]
 
-FROM golang:alpine AS builder
+FROM golang:1.23 AS builder
 WORKDIR /out
-ENV CGO_ENABLED=1
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . ./
-RUN apk --no-cache add make git gcc libtool musl-dev ca-certificates dumb-init 
-RUN go build -o ./main ./cmd
+RUN go build -o ./main ./cmd/web
 
 FROM alpine:3.20 AS runner
 WORKDIR /app
-COPY /internal/views/ ./internal/views/
+COPY /internal/web/views/ ./internal/web/views/
 COPY --from=builder /out/main ./
-COPY --from=dev /app/static/css/output.css ./static/css/output.css
-COPY /static/favicon.ico ./static/favicon.ico
+COPY --from=dev /app/internal/web/static/css/output.css ./web/static/css/output.css
+COPY ./internal/web/static/favicon.ico ./static/favicon.ico
 CMD ["./main"]

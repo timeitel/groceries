@@ -1,0 +1,39 @@
+---
+services:
+  groceries:
+    image: groceries:dev
+    build:
+      context: .
+      target: dev
+    ports: [3000:3000]
+    environment:
+      DB_URL: file:/data/groceries.db
+    # TODO: probably move to file secret and same process for prod
+    # Create file in GH actionsTODO: probably move to file secret and same process for prod
+    volumes:
+      - type: volume
+        source: db
+        target: /data
+    develop:
+      watch:
+        - action: sync
+          path: ./cmd
+          target: /app/cmd
+        - action: sync
+          path: ./internal
+          target: /app/internal
+        - action: sync+restart
+          path: ./.air.toml
+          target: /app/.air.toml
+        - action: rebuild
+          path: ./go.mod
+        - action: rebuild
+          path: ./go.sum
+        - action: rebuild
+          path: ./compose.yml
+        - action: rebuild
+          path: ./Dockerfile
+volumes:
+  db:
+# secrets:
+# db_url:

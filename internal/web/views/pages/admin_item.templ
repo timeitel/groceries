@@ -1,0 +1,40 @@
+package pages
+
+import (
+	"fmt"
+	"github.com/timeitel/groceries/internal/domain/item"
+	"github.com/timeitel/groceries/internal/web/views/layouts"
+)
+
+templ AdminItem(i item.Item) {
+	@layouts.Admin() {
+		@itemPageContent(i)
+	}
+}
+
+templ itemPageContent(i item.Item) {
+	<div class="px-4 pt-2 pb-4 mb-6 w-min bg-gray-100 rounded border border-white shadow-sm">
+		<h1 class="mb-2 text-2xl font-semibold">Edit item</h1>
+		<form
+			class="flex flex-col items-start mb-4"
+			hx-put={ newURL(fmt.Sprintf("/admin/items/%d", i.ID)) }
+			hx-swap="outerHTML"
+		>
+			<label>Name</label>
+			<input type="text" value={ i.Name } name="name" class="border rounded border-gray-200 mb-3 p-1 w-full" required/>
+			<label>Description</label>
+			<textarea type="text" name="description" class="border border-gray-200 rounded mb-4 p-1" required>
+				{ i.Description }
+			</textarea>
+			<button class="p-2 text-white bg-blue-900 rounded">Edit</button>
+		</form>
+		<form
+			hx-delete={ newURL(fmt.Sprintf("/admin/items/%d", i.ID)) }
+			hx-swap="outerHTML"
+			hx-target="body"
+			hx-replace-url="true"
+		>
+			<button class="p-2 text-white bg-red-500 rounded">Delete</button>
+		</form>
+	</div>
+}

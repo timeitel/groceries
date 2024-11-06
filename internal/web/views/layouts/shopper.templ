@@ -1,0 +1,23 @@
+package layouts
+
+templ Shopper(heading templ.Component) {
+	<html>
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<script src="https://unpkg.com/htmx.org@1.9.11"></script>
+			<link rel="stylesheet" href="/static/css/output.css"/>
+			<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon.ico"/>
+			<title>groceries!</title>
+			<script src="/static/js/events.js" defer></script>
+		</head>
+		<body class="h-full bg-green-200">
+			<nav class="p-5 bg-white">
+				@heading
+			</nav>
+			<main class="p-5">
+				{ children... }
+			</main>
+		</body>
+	</html>
+}

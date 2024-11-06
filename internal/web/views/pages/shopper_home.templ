@@ -1,0 +1,49 @@
+package pages
+
+import (
+	"fmt"
+	"github.com/timeitel/groceries/internal/domain/cart"
+	"github.com/timeitel/groceries/internal/domain/item"
+	c "github.com/timeitel/groceries/internal/web/views/components"
+	"github.com/timeitel/groceries/internal/web/views/layouts"
+)
+
+type ShopperHomeViewModel struct {
+	Items     item.Items
+	UserName  string
+	CartItems cart.Items
+}
+
+templ ShopperHome(vm ShopperHomeViewModel) {
+	@layouts.Shopper(shopperHomeHeading(vm.UserName)) {
+		@shopperHomeCatalogue(vm.Items)
+		@shopperHomeCart(vm.CartItems)
+	}
+}
+
+templ shopperHomeHeading(name string) {
+	Hey { name }, here's your shopping list
+}
+
+templ shopperHomeCatalogue(items item.Items) {
+	<h1 class="text-lg font-semibold">Catalogue</h1>
+	<div id="items" class="flex flex-wrap gap-4">
+		for _, p := range items {
+			<a href={ templ.URL(fmt.Sprintf("/items/%d", p.ID)) }>
+				@c.ItemCard(p)
+			</a>
+		}
+	</div>
+}
+
+templ shopperHomeCart(items cart.Items) {
+	<h1 class="text-lg font-semibold">Cart</h1>
+	<div id="cart" class="flex flex-col">
+		for idx, i := range items {
+			<div>
+				<input type="checkbox" value={ string(idx) }/>
+				<label>{ string(i.Name) }</label>
+			</div>
+		}
+	</div>
+}

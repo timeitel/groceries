@@ -14,9 +14,12 @@
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
-# Go workspace file
 go.work
 
 # build artifacts
 static/css/output.css
 tmp
+main
+internal/infrastructure/data/db
+**_templ.go
+**_templ.txt

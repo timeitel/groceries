@@ -2,9 +2,10 @@
 
 - htmx
 - go
-- sqlite
 - docker
+- libsql / sqlite, 
+- sqlc (sql -> go types code-gen) & goose (migrations) 
 
 ### Dev
 
-`docker compose -f compose.dev.yml up --watch`
+`docker compose up --watch`

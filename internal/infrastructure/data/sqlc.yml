@@ -1,0 +1,14 @@
+---
+version: '2'
+sql:
+  - engine: sqlite
+    queries: queries/
+    schema: schema.sql
+    gen:
+      go:
+        out: db
+        overrides:
+          - db_type: uuid
+            go_type:
+              import: github.com/google/uuid
+              type: UUID
